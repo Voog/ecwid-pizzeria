@@ -1,0 +1,19 @@
+# Sample from https://github.com/priithaamer/ipizza
+swedbank:
+  service_url: http://foo.bar/swedbank
+  return_url: http://mycompany.com/store
+  cancel_url: http://mycompany.com/cancel
+
+  # Your private key file path. Can be specified relatively
+  # to YAML file
+  file_key: ./certificates/my_private.key
+
+  # If your private key is protected with password,
+  # provide it here
+  key_secret: private_key_password
+
+  # Path to bank's public key file. Can be specified
+  # relatively to YAML file
+  file_cert: ./certificates/bank_public.crt
+  snd_id: dealer
+  encoding: UTF-8
