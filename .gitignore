@@ -1,5 +1,8 @@
 .bundle
 .DS_Store
 db/*.sqlite3
+config/certificates/*.*
+config/database.yml
+config/ipizza.yml
 log/*.log
 tmp/**/*
