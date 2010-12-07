@@ -10,7 +10,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101206211320) do
+ActiveRecord::Schema.define(:version => 20101207195206) do
+
+  create_table "bank_messages", :force => true do |t|
+    t.string   "provider",                                        :null => false
+    t.boolean  "status",                                          :null => false
+    t.integer  "payment_id"
+    t.integer  "snd_id"
+    t.integer  "receipt_id"
+    t.string   "stamp"
+    t.string   "transaction_no"
+    t.decimal  "amount",           :precision => 10, :scale => 2
+    t.string   "currency"
+    t.string   "receiver_account"
+    t.string   "receiver_name"
+    t.string   "sender_account"
+    t.string   "sender_name"
+    t.string   "ref_no"
+    t.string   "message"
+    t.text     "params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "payments", :force => true do |t|
     t.integer  "order_id",       :null => false

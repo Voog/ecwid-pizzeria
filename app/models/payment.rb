@@ -2,6 +2,7 @@ class Payment < ActiveRecord::Base
   
   module Status
     Created = 'created'
+    Delivered = 'delivered'
   end
   
   validate :order_id, :amount, :presence => true

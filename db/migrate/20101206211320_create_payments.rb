@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments do |t|
       t.integer :order_id, :null => false
       t.string :description
-      t.float :amount, :null => false
+      t.decimal :amount, :null => false, :precision => 10, :scale => 2
       t.string :frequency
       t.string :customer_email
       t.string :return_path

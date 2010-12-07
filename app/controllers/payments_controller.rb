@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
     )
     
     @payment = Ipizza::Payment.new(
-      :stamp => pmt.order_id, :amount => pmt.amount, :refnum => pmt.order_id,
+      :stamp => pmt.id, :amount => pmt.amount, :refnum => pmt.order_id,
       :message => pmt.description, :currency => 'EUR'
     )
     

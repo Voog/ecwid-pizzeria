@@ -1,11 +1,11 @@
-<% form_tag @swed_request.service_url, :method => :post do %>
+<%= form_tag @swed_request.service_url, :method => :post do %>
   <% @swed_request.request_params.each do |key, val| %>
     <%= hidden_field_tag key, val %>
   <% end %>
   <%= submit_tag 'Swedbank' %>
 <% end %>
 
-<% form_tag @seb_request.service_url, :method => :post do %>
+<%= form_tag @seb_request.service_url, :method => :post do %>
   <% @seb_request.request_params.each do |key, val| %>
     <%= hidden_field_tag key, val %>
   <% end %>
