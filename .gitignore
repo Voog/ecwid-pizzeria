@@ -5,4 +5,5 @@ config/certificates/*.*
 config/database.yml
 config/ipizza.yml
 log/*.log
+public/test*.html
 tmp/**/*
