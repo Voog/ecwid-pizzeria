@@ -2,7 +2,7 @@ class CreateBankMessages < ActiveRecord::Migration
   def self.up
     create_table :bank_messages do |t|
       t.string :provider, :null => false
-      t.boolean :status, :null => false
+      t.string :status, :null => false
       t.integer :payment_id
       t.integer :snd_id
       t.integer :receipt_id
