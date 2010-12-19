@@ -1,5 +1,5 @@
 EcwidPizzeria::Application.routes.draw do
-  root :to => 'payments#create'
+  root :to => 'payments#new'
   
   resources :payments
   

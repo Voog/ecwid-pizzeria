@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
     
     @payment = Ipizza::Payment.new(
       :stamp => pmt.id, :amount => pmt.amount, :refnum => pmt.order_id,
-      :message => pmt.description, :currency => 'EUR'
+      :message => pmt.description, :currency => 'EEK'
     )
     
     @swed_request = Ipizza::Provider::Swedbank.new.payment_request(@payment)

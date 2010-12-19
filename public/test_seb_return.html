@@ -1,0 +1,212 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Unet</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+BODY {FONT-SIZE: x-small; COLOR: black; FONT-FAMILY: Arial; BACKGROUND-COLOR: #ffffff; MARGIN-TOP:0px;MARGIN-LEFT:10px;}
+TD{FONT-SIZE:  x-small;FONT-FAMILY: Arial; TEXT-DECORATION: none}
+INPUT{COLOR:#000000; FONT-SIZE: x-small; FONT-FAMILY: Arial; BACKGROUND-COLOR: #ffffff;}
+DIV.msg {background-color: #f5f5f5;}
+DIV.msg { margin: 15px 0 0 0; line-height: 18px; background: #f5f5f5 repeat-x; }
+DIV.msg img { float: right; }
+DIV.msg DIV.a { background: url(/unet3/img/ipank/msg_gray_ico01.gif) no-repeat; padding: 15px 15px 15px 60px; }
+DIV.msg DIV.a P { margin: 0; padding: 0; FONT-SIZE: 10px;}
+DIV.msg P.heading { font-size: 14px; font-weight: bold; }
+DIV.msg P.heading SPAN.label { margin-right: 10px; float: left; padding: 2px 0; }
+DIV.msg P.heading SPAN.tag { background: url(/unet3/img/ipank/bg32.gif) no-repeat; color: #634932; float: left; font-weight: bold; font-size: 14px; }
+DIV.msg P.heading SPAN.tag SPAN { float: left; background: url(/unet3/img/ipank/bg32.gif) 100% 0 no-repeat; padding: 3px 10px; }
+DIV.msg P.heading INPUT.code { font-size: 14px; font-weight: bold; padding: 1px 5px; width: 50px; }
+DIV.msg P.links { margin: 5px 0 0 0; }
+DIV.msg P.links SPAN { color: #bbb; margin: 0 3px; }
+DIV.msg SPAN.corner { position: absolute; width: 5px; height: 5px; overflow: hidden; }
+DIV.msg SPAN.corner-a { background: url(/unet3/img/ipank/corner5_1.png) no-repeat; left: 0; top: 0; }
+DIV.msg SPAN.corner-b { background: url(/unet3/img/ipank/corner5_2.png) no-repeat; right: 0; top: 0; }
+DIV.msg SPAN.corner-c { background: url(/unet3/img/ipank/corner5_3.png) no-repeat; left: 0; bottom: 0; }
+DIV.msg SPAN.corner-d { background: url(/unet3/img/ipank/corner5_4.png) no-repeat; right: 0; bottom: 0; }
+* HTML DIV.msg SPAN.corner-a { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/corner5_1.png', sizingMethod='crop'); background: none; }
+* HTML DIV.msg SPAN.corner-b { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/corner5_2.png', sizingMethod='crop'); background: none; }
+* HTML DIV.msg SPAN.corner-c { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/corner5_3.png', sizingMethod='crop'); background: none; }
+* HTML DIV.msg SPAN.corner-d { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/corner5_4.png', sizingMethod='crop'); background: none; }
+.unbutton{color:#333333;font-family: Arial;FONT-SIZE:x-small; font-weight: bold; background-color:#60CD18;}
+.odd{BORDER-TOP: #999999 1px solid;PADDING-RIGHT: 5px;PADDING-LEFT: 5px;FONT-WEIGHT: normal;FONT-SIZE: x-small;VERTICAL-ALIGN: top;COLOR: #333333;LINE-HEIGHT: 15px;FONT-STYLE: normal;FONT-FAMILY: arial, helvetica, Sans-serif;BACKGROUND-COLOR: #ffffff}
+.even{BORDER-TOP: #999999 1px solid;PADDING-RIGHT: 5px;PADDING-LEFT: 5px;FONT-WEIGHT: normal;FONT-SIZE: x-small;VERTICAL-ALIGN: top;COLOR: #333333;LINE-HEIGHT: 15px;FONT-STYLE: normal;FONT-FAMILY: arial, helvetica, Sans-serif;BACKGROUND-COLOR: #f2f2f2}
+.uninf{COLOR: #333333;FONT-WEIGHT:normal;BACKGROUND-COLOR: #FBF5E5;BORDER: #999999 1px solid;}
+.uninfnobottomborder{COLOR: #333333;FONT-WEIGHT:normal;BACKGROUND-COLOR: #FBF5E5;BORDER-TOP: 1px #999999 solid;BORDER-RIGHT: 1px #999999 solid;BORDER-LEFT: 1px #999999 solid;}
+.uninfnotopborder{COLOR: #333333;FONT-WEIGHT:normal;BACKGROUND-COLOR: #FBF5E5;BORDER-BOTTOM: 1px #999999 solid;BORDER-RIGHT: 1px #999999 solid;BORDER-LEFT: 1px #999999 solid;}
+.unheadb{FONT-SIZE: x-small; FONT-FAMILY: Arial; FONT-WEIGHT: normal;}
+.unhead{FONT-SIZE: x-small;FONT-FAMILY: Arial;COLOR: #000000;BACKGROUND-COLOR:#CCD7E5;FONT-WEIGHT:bold;}
+.unheader{FONT-SIZE: x-small;FONT-FAMILY: Arial;COLOR: #F2F2F2;BACKGROUND-COLOR:#00367F;FONT-WEIGHT:bold;}
+.unheadnob{FONT-SIZE: x-small;FONT-FAMILY: Arial;COLOR: #000000;BACKGROUND-COLOR:#CCD7E5;FONT-WEIGHT:normal;}
+A{FONT-WEIGHT: normal;FONT-SIZE: x-small;COLOR: #3B7A0F;FONT-FAMILY: Arial, Helvetica, Sans-serif; TEXT-DECORATION: none}
+A:hover{FONT-WEIGHT: normal;COLOR: #3B7A0F; FONT-FAMILY: Arial, Helvetica, Sans-serif;TEXT-DECORATION: underline}
+.unbg{background-color: #F2F2F2;}
+.unred{COLOR: #FF2222;}
+.unacthead{COLOR: #000000;FONT: 13px Verdana;FONT-WEIGHT:bold;WHITE-SPACE:nowrap;}
+.undate{COLOR: #003366;FONT-FAMILY: Arial;FONT-SIZE: xx-small;FONT-WEIGHT: bold;PADDING: 0px;TEXT-ALIGN: right;TEXT-DECORATION: none;POSITION: relative;WIDTH: 100%;WHITE-SPACE: nowrap;BORDER: 0px;}
+.unwhite{FONT: bold x-small Arial;COLOR: #FFFFFF;TEXT-TRANSFORM: uppercase;TEXT-DECORATION:none;}
+A.unwhite{FONT: normal x-small Arial, Helvetica, Sans-serif;TEXT-TRANSFORM: none;COLOR: #3B7A0F;TEXT-DECORATION:none;}
+.unerror{COLOR: #df0029;TEXT-DECORATION: NONE}
+.unheader A{COLOR: #F2F2F2;TEXT-ALIGN: center;FONT-WEIGHT: normal;TEXT-DECORATION: none;WHITE-SPACE: nowrap;}
+.ungreen{COLOR: #3B7A0F;}
+.unmustbe{FONT-WEIGHT: bold;}
+.unmenu {COLOR:#000000; TEXT-DECORATION: none; font: x-small Arial;FONT-WEIGHT:normal;}
+.unmenu A {COLOR:#000000; TEXT-DECORATION: none; font: x-small Arial;FONT-WEIGHT:normal;}
+.unmenu A:hover {COLOR:#3B7A0F; TEXT-DECORATION: none; font: x-small Arial;FONT-WEIGHT:normal;}
+.unmenu A.active {COLOR:#ff9933; TEXT-DECORATION: none; font: x-small Arial;FONT-WEIGHT:normal;}
+.unmenu1{TEXT-DECORATION: none; COLOR:#000000; font: x-small Arial;FONT-WEIGHT:normal; BACKGROUND-COLOR:#BFEBA3;}
+A.unmenu1{TEXT-DECORATION: none; COLOR:#000000; font: x-small Arial;FONT-WEIGHT:normal; BACKGROUND-COLOR:#BFEBA3;}
+A.unmenu1:hover{TEXT-DECORATION: none; COLOR:#000000; font: x-small Arial; FONT-WEIGHT:normal; BACKGROUND-COLOR:#BFEBA3;}
+.unmenu2 {TEXT-DECORATION: none; COLOR:#000000; font: x-small Arial; padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:15px; BACKGROUND-COLOR:#F2F2F2; }
+.unmenu2 A {TEXT-DECORATION: none; COLOR:#000000; font: x-small Arial; padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:15px; BACKGROUND-COLOR:#F2F2F2;}
+.unmenu2 A.hover {TEXT-DECORATION:  none; COLOR:#000000; font: x-small Arial;padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:15px; BACKGROUND-COLOR:#F2F2F2;}
+.unmenutext{COLOR: #000000;FONT: x-small Arial;FONT-WEIGHT:normal;WHITE-SPACE:nowrap; padding-left:15px; BACKGROUND-COLOR:#BFEBA3;}
+</style>
+<link rel="stylesheet" href="/unet3/css/crmform.css" type="text/css">
+<script language="JavaScript">function UnetOnLoad(){};</script>
+</head>
+<body bgcolor="#ffffff" onload="UnetOnLoad()">
+<div style="width:99%; padding:0px;">
+<table width="100%" border="0" cellpadding="3" cellspacing="0">
+<tr>
+<td rowspan="3" width="131px" valign="middle" align="center"><a href="un3min.r?sesskey=IapjfhkRdcbUaadnkjKJhHaWlnbkbiBY&amp;act=LOADMAIN&amp;frnam=0"><img src="/unet3/img/images2/unet_logo.gif" alt="avalehele" border="0"></a></td><td width="80%">
+<br>
+</td><td align="right">
+<table border="0" cellpadding="3" cellspacing="0">
+<tr>
+<td><font color="#3b7a0f" style="vertical-align:text-bottom;"><b>&raquo;</b></font><b class="unwhite">_</b><a class="unwhite" href="un3min.r?act=LOGEXIT&amp;sesskey=IapjfhkRdcbUaadnkjKJhHaWlnbkbiBY&amp;frnam=0">Abiinfo</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr></tr>
+<tr>
+<td>
+<table border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td>
+<br>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<hr noshade="true" size="1">
+<table width="100%" border="0" cellpadding="3" cellspacing="0">
+<tr>
+<td class="undate" align="right">p&uuml;hap&auml;ev, 19.12.2010, kell:15.42</td>
+</tr>
+</table>
+<br>
+<div style="width:99%; padding:0px;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top" width="100%">
+<table border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td class="unacthead" nowrap="true">Riigisisene makse</td><td width="100%" nowrap="true" valign="middle">
+<table width="100%" height="10" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td bgcolor="#00367F" align="right"><img src="/unet3/img/images2/gradient.gif" height="10" border="0"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="10"></td>
+</tr>
+</table>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr></tr>
+</table>
+<form name="vorm" method="post" action="http://ecwid-pizzeria.local/ipizza/callback/seb" ENCTYPE="iso-8859-1">
+<table cellspacing="0" cellpadding="5" border="0" width="100%">
+<COLGROUP>
+<COL span="1" class="unheadb">
+<COL span="2">
+</COLGROUP>
+<tr class="uninf">
+<td colspan="3" nowrap="true">Maksekorraldus on sooritatud</td>
+</tr>
+<tr>
+<td nowrap="true">Makse nr.</td><td colspan="2">14631</td>
+</tr>
+<tr>
+<td nowrap="true">Maksan kontolt</td><td colspan="2" xml:space="preserve">10010046155012 &otilde;IIGER LEOPOLD Arvelduskonto EEK</td>
+</tr>
+<tr>
+<td nowrap="true">Saaja nimi</td><td colspan="2">ALLAS ALLAR</td>
+</tr>
+<tr>
+<td nowrap="true">Saaja konto</td><td colspan="2">10002050618003</td>
+</tr>
+<tr>
+<td nowrap="true">Makse selgitus</td><td colspan="2">Startup beer(1), Exit beer(1)</td>
+</tr>
+<tr>
+<td nowrap="true">Viitenumber</td><td colspan="2">13</td>
+</tr>
+<tr>
+<td nowrap="true">Makse kuup&auml;ev</td><td colspan="2">19.12.2010</td>
+</tr>
+<tr>
+<td nowrap="true">Summa</td><td>11,00</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr size="1" noshade="true">
+</td>
+</tr>
+<tr>
+<input type="hidden" name="VK_SERVICE" value="1101"><input type="hidden" name="VK_VERSION" value="008"><input type="hidden" name="VK_SND_ID" value="EYP"><input type="hidden" name="VK_REC_ID" value="testvpos"><input type="hidden" name="VK_STAMP" value="15"><input type="hidden" name="VK_T_NO" value="14631"><input type="hidden" name="VK_AMOUNT" value="11"><input type="hidden" name="VK_CURR" value="EEK"><input type="hidden" name="VK_REC_ACC" value="10002050618003"><input type="hidden" name="VK_REC_NAME" value="ALLAS ALLAR"><input type="hidden" name="VK_SND_ACC" value="10010046155012"><input type="hidden" name="VK_SND_NAME" value="T&Otilde;&Auml;GER Le&otilde;p&auml;&ouml;ld&cedil;&acute;&uml;&brvbar;"><input type="hidden" name="VK_REF" value="13"><input type="hidden" name="VK_MSG" value="Startup beer(1), Exit beer(1)"><input type="hidden" name="VK_T_DATE" value="19.12.2010"><input type="hidden" name="VK_MAC" value="PGQEDuAPhquWVPvOy88bz9c848c4GbytY+a67ocJYwetKd899aHuu7Yc8yd9lkopVdEsOqeXMiJo6bqm7xM84oHfZLJvfwFtJFRu7bIVbrqG5Nj8lk7fj5HlXSqW6lZezcQmnLvrsYmcR7/9156JeVmuH5fIE4zY7JKIasWeaKg="><input type="hidden" name="VK_LANG" value=""><input type="hidden" name="VK_RETURN" value="http://ecwid-pizzeria.local/ipizza/callback/seb"><input type="hidden" name="VK_AUTO" value="N"><input type="hidden" name="VK_CHARSET" value="UTF-8"><td width="20%"></td><td colspan="2"><input type="hidden" name="keel" value="EST"><input type="hidden" name="appname" value="UN3MIN"><input type="hidden" class="uno" name="act" value="UPOSTEST2"><input type="submit" class="unbutton" name="SubmitButton" value="Tagasi kaupmehe juurde" onClick=" if(!document.vorm.target){if(document.vorm.SubmitButton.length==undefined){document.vorm.SubmitButton.disabled=true;}else{for(var i=0;i<document.vorm.SubmitButton.length;i++) {document.vorm.SubmitButton[i].disabled=true;}} document.vorm.submit();  return false;}"></td>
+</tr>
+</table>
+</form>
+<table width="100%">
+<tr>
+<td bgcolor="#FFFFFF" colspan="2"></td><td bgcolor="#FFFFFF" align="middle" width="100%"><img src="/unet3/img/images2/shadow_361.gif" width="360" height="30" border="0"></td>
+</tr>
+</table>
+</td><td class="unwhite" width="10">__</td><td valign="top" width="180"></td>
+</tr>
+</table>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td valign="top"></td>
+</tr>
+<tr>
+<td valign="top">
+<TABLE cellspacing="0" cellpadding="0" width="100%" border="0">
+<TBODY>
+<TR>
+<TD colspan="3">
+<hr noshade="true" size="2" color="#003366">
+</TD>
+</TR>
+<TR>
+<TD class="unfooter" valign="top" nowrap="true" height="30">Eesti &Uuml;hispank, Tornim&auml;e 2, Tallinn 15010 Info ja kliendiabi: (+372) 665 5100, e-mail:<A href="mailto:info@eyp.ee">info@eyp.ee</A></TD><TD></TD><TD align="right"><IMG src="/unet3/img/images2/seblogofoot.gif" border="0" ALT="SEB"></TD>
+</TR>
+</TBODY>
+</TABLE>
+</td>
+</tr>
+</table>
+</div>
+<script language="JavaScript1.2">function UnetOnLoad(){ 
+
+} 
+</script>
+<form name="commonUserDataForm">
+<input type="hidden" name="sumformat" value="2"><input type="hidden" name="langformat" value="EST"><input type="hidden" name="dateformat" value="1"><input type="hidden" name="timeformat" value="1">
+</form>
+</body>
+</html>
+
+
+<!-- Generated by Webspeed: http://www.webspeed.com/ -->

@@ -1,0 +1,28 @@
+<% if @payment %>
+Payment info
+------------
+
+Description: <%= @payment.description %>
+Amount: <%= @payment.amount %>
+Customer e-mail: <%= @payment.customer_email %>
+Status: <%= @payment.status %>
+ID: <%= @payment.id %>
+<% end %>
+
+<% if @bank_message %>
+Bank message
+------------
+
+Transaction: <%= @bank_message.transaction_no %>
+Receipt: <%= @bank_message.receipt_id %>
+Amount: <%= @bank_message.amount %> <%= @bank_message.currency %>
+Stamp: <%= @bank_message.stamp %>
+Ref.no: <%= @bank_message.ref_no %>
+Sender name: <%= @bank_message.sender_name %>
+Sender account: <%= @bank_message.sender_account %>
+Receiver name: <%= @bank_message.receiver_name %>
+Receiver account: <%= @bank_message.receiver_account %>
+Message: <%= @bank_message.message %>
+Provider: <%= @bank_message.provider %>
+Status: <%= @bank_message.status %>
+<% end %>
