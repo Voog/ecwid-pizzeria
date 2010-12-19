@@ -13,14 +13,12 @@ class IpizzaController < ApplicationController
       if payment and not payment.delivered?
         payment.deliver!
         PaymentResponseMailer.payment_received(bank_message, payment).deliver
-      end
-      
+      end  
       render :action => :success
     else
       if payment and not payment.cancelled?
         payment.cancel!
       end
-      
       render :action => :cancel
     end
   end
