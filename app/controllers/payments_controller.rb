@@ -6,12 +6,12 @@ class PaymentsController < ApplicationController
     pmt = Payment.create!(
       :order_id => params[:ord], :description => params[:des], :amount => params[:amt],
       :frequency => params[:frq], :customer_email => params[:ceml], :return_path => params[:ret],
-      :opt => params[:opt]
+      :opt => params[:opt], :currency => 'EUR'
     )
     
     @payment = Ipizza::Payment.new(
       :stamp => pmt.id, :amount => pmt.amount, :refnum => pmt.order_id,
-      :message => pmt.description, :currency => 'EUR'
+      :message => pmt.description, :currency => pmt.currency
     )
     
     @swed_request = Ipizza::Provider::Swedbank.new.payment_request(@payment)
