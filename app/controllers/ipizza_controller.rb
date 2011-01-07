@@ -13,6 +13,7 @@ class IpizzaController < ApplicationController
       if payment and not payment.delivered?
         payment.deliver!
         PaymentResponseMailer.payment_received(bank_message, payment).deliver
+        PaymentResponseMailer.payment_confirmation(bank_message, payment).deliver
       end  
       render :action => :success
     else

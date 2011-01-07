@@ -1,0 +1,7 @@
+et:
+  payment_response:
+    payment_received:
+      subject: "[E-Pood] Makse vastu võetud"
+    
+    payment_confirmation:
+      subject: "Sinu makse kinnitus"
