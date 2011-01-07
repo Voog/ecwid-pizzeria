@@ -1,10 +1,6 @@
 .bundle
 .DS_Store
 db/*.sqlite3
-config/config.yml
-config/certificates/*.*
-config/database.yml
-config/ipizza.yml
 log/*.log
 public/test*.html
 tmp/**/*

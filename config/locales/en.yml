@@ -1,7 +1,25 @@
 en:
-  payment_response:
+  ipizza:
+    cancel:
+      cancel_message: Payment has been cancelled
+      return_to_store: Return to store
+    
+    success:
+      confirm_message: Your payment has been accepted
+      return_to_store: Return to store
+  
+  payment_response_mailer:
     payment_received:
       subject: Payment received in store
     
     payment_confirmation:
+      amount: "Amount:"
+      footer_thank_you: Thank you for doing business with us
       subject: Your payment confirmation
+      payment_description: "Payment description:"
+      title: "Thank you from ordering from us. Here are your payment details:"
+
+  payments:
+    create:
+      description: "Payment description:"
+      amount: "Amount:"

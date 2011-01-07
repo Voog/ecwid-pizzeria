@@ -1,7 +1,6 @@
-Payment info
-------------
+<%= t('.title') %>
 
-Description: <%= @payment.description %>
-Amount: <%= @payment.amount %>
+<%= t('.payment_description') %> <%= @payment.description %>
+<%= t('.amount') %> <%= number_to_currency(@payment.amount, :unit => @payment.currency, :format => '%n %u') %>
 
-Thank you for doing business with us!
+<%= t('.footer_thank_you') %>

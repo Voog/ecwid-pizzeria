@@ -1,3 +1,8 @@
+<h2>Choose payment method</h2>
+
+<p><%= t('.description') %> <%= @payment.description %></p>
+<p><%= t('.amount') %> <%= number_to_currency(@payment.amount, :unit => @payment.currency, :format => '%n %u') %></p>
+
 <%= form_tag @swed_request.service_url, :method => :post do %>
   <% @swed_request.request_params.each do |key, val| %>
     <%= hidden_field_tag key, val %>
