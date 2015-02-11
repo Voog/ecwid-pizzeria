@@ -1,36 +1,99 @@
-Application that adds iPizza payment gateway to Ecwid with small hack using e-Path payment gateway settings in Ecwid store.
+This application adds Estonian banks ([iPizza payment](https://github.com/Voog/ipizza) gateway) to [Ecwid](http://www.ecwid.com) with small hack using [e-Path](http://kb.ecwid.com/e-Path) payment gateway settings in Ecwid store.
 
-Parameters provided by Ecwid
-============================
+# App configuration
 
-* **ord** A unique order number (19)
-* **des** What the customer is buying or "Online Order" for brevity (Manolo Shoes)
-* **amt** The amount the customer is paying and authorising you to charge (49.95)
-* **frq** The charge frequency (Once, monthly etc), not relevant in this context
-* **ceml** Customer email address (foo@bar.com)
-* **ret** A return URL (the URL to return after payment is done) (https://store.mysite.com)
+App can be customized by using environmental variables. Check out configuration variable names in configuration files:
 
-Test submit file
-================
+* [config/application.yml](./config/application.yml) - defaults for application variables.
+* [config/banks.yml](./config/banks.yml) - defaults for iPizza and EstCard providers.
+* [config/secrets.yml](./config/secrets.yml) - defaults for secrets.
 
-To emulate form submitted from ecwid, simply use this html file:
+Minimum set of environmental variables for production environment:
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <title>Ecwid pizzeria test submit</title>
-    </head>
-    <body>
-      <form action="/payments" method="post">
-        <input type="hidden" name="ret" value="http://app.ecwid.com/e-path/123456" />
-        <input type="hidden" name="ceml" value="foo@bar.com" />
-        <input type="hidden" name="ord" value="1" />
-        <input type="hidden" name="frq" value="Once" />
-        <input type="hidden" name="des" value="Startup beer(1), Exit beer(1)" />
-        <input type="hidden" name="opt" value="685991;1290662631" />
-        <input type="hidden" name="amt" value="11.00" />
-        <input type="submit" value="Submit new payment" />
-      </form>
-    </body>
-    </html>
+* `ECWIDSHOP_SHOP_NAME="My eShop"`
+* `ECWIDSHOP_SHOP_EXTERNAL_URL=http://example.com`
+* `ECWIDSHOP_MAILER_DEFAULT_FROM="Ecwid eShop <store@example.com>"`
+* `ECWIDSHOP_MAILER_NOTIFICATION_EMAIL=store@example.com`
+* `ECWIDSHOP_SECRET_KEY_BASE=long-random-string-3274y23472384y237842y73hwerbhjwfbjhsdbfsygf7r3gfs`
+* `ECWIDSHOP_PROVIDER_RETURN_HOST=https://shop.example.com`
+
+At least one bank should be enabled (e.g. `ECWIDSHOP_BANK_SWEDBANK_ENABLED=true`) and configured (see [config/banks.yml](./config/banks.yml)).
+
+To setup database configuration run `bin/setup` to instal gems and copy `config/database.sample.yml` to `config/database.yml`.
+
+# Setup in Ecwid
+
+Add a new [e-Path](http://kb.ecwid.com/e-Path) payment method to your Ecwid account. Point it's url to your app.
+
+If you want the user to choose the payment method in this application manually then use this general url:
+
+```
+https://shop.example.com/payments
+```
+
+Or you can add more than one e-Path payment methods to your Ecwid account - one by each enabled payment method (bank). If selected provider is enabled in app then user is automatically redirected to given provider.
+
+Supported endpoints:
+
+```
+https://shop.example.com/payments/swedbank
+https://shop.example.com/payments/seb
+https://shop.example.com/payments/lhv
+https://shop.example.com/payments/sampo
+https://shop.example.com/payments/krediidipank
+https://shop.example.com/payments/nordea
+https://shop.example.com/payments/estcard
+```
+
+## Parameters provided by Ecwid
+
+* `ord` A unique order number (`19`)
+* `des` What the customer is buying or "Online Order" for brevity (`Manolo Shoes`)
+* `amt` The amount the customer is paying and authorising you to charge (`49.95`)
+* `frq` The charge frequency (`Once`, `monthly` etc), not relevant in this context
+* `ceml` Customer email address (`foo@bar.com`)
+* `ret` A return URL (the URL to return after payment is done) (`https://store.mysite.com`)
+
+# App management
+
+Payments listing and current configuration of the app can be seen in `https://shop.example.com/admin` by using authentication credentials from configuration (`ECWIDSHOP_AUTHENTICATION_USERNAME` and `ECWIDSHOP_AUTHENTICATION_PASSWORD`).
+
+# Testing
+
+## Test submit file
+
+To emulate form submitted from Ecwid, simply use this html file:
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Ecwid pizzeria test submit</title>
+</head>
+<body>
+  <form action="/payments" method="post">
+    <input type="hidden" name="ret" value="http://app.ecwid.com/e-path/123456" />
+    <input type="hidden" name="ceml" value="foo@bar.com" />
+    <input type="hidden" name="ord" value="1" />
+    <input type="hidden" name="frq" value="Once" />
+    <input type="hidden" name="des" value="Startup beer(1), Exit beer(1)" />
+    <input type="hidden" name="opt" value="685991;1290662631" />
+    <input type="hidden" name="amt" value="11.00" />
+    <input type="submit" value="Submit new payment" />
+  </form>
+</body>
+</html>
+```
+
+## Test credit cards for EstCard payment method
+
+```
+Mastercard: 5450339000000014
+Valid: 0915 (MMYY)
+CVV2/CVC: 432
+
+VISA: 4761739001010010
+Valid: 1212 (MMYY)
+CVV2: 780
+```

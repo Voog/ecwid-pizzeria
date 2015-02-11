@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to t('.brand_title'), admin_payments_path, class: 'navbar-brand'  %>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <%= menuitem t('.payments'), admin_payments_path, %r(^/admin/payments) %>
+        <%= menuitem t('.bank_messages'), admin_bank_messages_path, %r(^/admin/bank_messages) %>
+        <%= menuitem t('.estcard_messages'), admin_estcard_messages_path, %r(^/admin/estcard_messages) %>
+        <%= menuitem t('.app_settings'), admin_app_settings_path, %r(^/admin/app_settings) %>
+      </ul>
+    </div>
+  </div>
+</nav>

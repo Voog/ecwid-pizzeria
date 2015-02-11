@@ -1,0 +1,80 @@
+en:
+  estcard:
+    callback:
+      success: "Payment has been accepted"
+      cancel: "Payment has been cancelled"
+      return_to_store: "Return to store"
+
+  ipizza:
+    callback:
+      success: "Payment has been accepted"
+      cancel: "Payment has been cancelled"
+      error: "Error on processing payment"
+      return_to_store: "Return to store"
+
+  payments:
+    create:
+      item_name: "Product"
+      item_amount: "Amount"
+      description: "Payment description:"
+      amount: "Total:"
+      title: Choose payment method
+
+  labels:
+    banks:
+      estcard: "Master, VISA"
+      krediidipank: Krediidipank
+      lhv: LHV Pank
+      nordea: Nordea
+      sampo: Danske Bank
+      seb: SEB
+      swedbank: Swedbank
+
+    currency:
+      EUR: "€"
+      USD: "$"
+
+    payment:
+      message: "%{shop_name} E-Shop order #%{order_id} (%{payment_id})"
+      status:
+        cancelled: Cancelled
+        created: Created
+        delivered: Delivered
+
+  layouts:
+    admin:
+      application:
+        title: E-Shop
+
+    application:
+      title: E-Shop
+      back_to_shop: Return to store
+
+  shared:
+    admin:
+      mainmenu:
+        brand_title: Shop
+        payments: Payments
+        bank_messages: Bank messags
+        estcard_messages: Credit card payments
+        app_settings: App settings
+
+  time:
+    formats:
+      default: '%d.%m.%Y %H:%M'
+
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+
+  will_paginate:
+    next_label: Next
+    previous_label: Previous
+    page_gap: "&hellip;"
+  

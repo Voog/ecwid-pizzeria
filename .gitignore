@@ -1,6 +1,16 @@
-.bundle
+/.bundle
 .DS_Store
-db/*.sqlite3
-log/*.log
-public/test*.html
-tmp/**/*
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.gitkeep
+/tmp
+!/tmp/.gitkeep
+/public/test*.html
+/config/certificates/*
+!/config/certificates/.gitkeep
+/config/application.production.yml
+/config/banks.production.yml
+/config/database.yml
+/config/database.production.yml
+.ruby-gemset
+.tm_properties

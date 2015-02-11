@@ -1,19 +1,69 @@
-<h2>Choose payment method</h2>
+<div class="row payment-header">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="page-header">
+      <h1 class="text-center"><%= t('.title') %></h1>
+    </div>
+  </div>
+</div>
+<div class="row payment-items">
+  <div class="col-md-6 col-md-offset-3">
+  <table class="table payment-table">
+    <thead>
+      <tr>
+        <th><%= t('.item_name') %></th>
+        <th class="text-right"><%= t('.item_amount') %></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% payment_items.each do |d| %>
+      <tr>
+        <td><%= d[:name] %></td>
+        <td class="text-right"><%= d[:amount] %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" class="text-right">
+          <%= t('.amount') %> <h4><%= number_to_currency(@payment.amount, unit: t(@payment.currency.to_s, scope: 'labels.currency')) %></h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  </div>
+</div>
+<div class="row text-center payment-banks">
+  <div class="col-md-6 col-md-offset-3">
+    <ul class="list-inline">
+      <% EcwidPizzeria::Application.config.banks.enabled.each do |code| %>
+        <li>
+          <%= ipizza_payment_form_tag @ipizza_payment, service: code, id: "payment-provider-#{code}" do %>
+            <%= image_submit_tag "#{code}.gif", alt: t(code, scope: 'labels.banks'), title: t(code, scope: 'labels.banks') %>
+          <% end %>
+        </li>
+      <% end %>
+      <% if EcwidPizzeria::Application.config.estcard.enabled %>
+        <li>
+          <%= form_tag EcwidPizzeria::Application.config.estcard.service_url, id: 'payment-provider-estcard' do %>
+            <%= hidden_field_tag :action, @estcard_request.action %>
+            <%= hidden_field_tag :ver, @estcard_request.ver %>
+            <%= hidden_field_tag :id, @estcard_request.merchant_id %>
+            <%= hidden_field_tag :ecuno, @estcard_request.ecuno %>
+            <%= hidden_field_tag :eamount, @estcard_request.eamount %>
+            <%= hidden_field_tag :cur, @estcard_request.cur %>
+            <%= hidden_field_tag :datetime, @estcard_request.datetime %>
+            <%= hidden_field_tag :mac, @estcard_request.mac %>
+            <%= hidden_field_tag :lang, @estcard_request.lang %>
+            <%= image_submit_tag 'estcard.png', alt: t('labels.banks.estcard'), alt: t('labels.banks.estcard') %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<p><%= t('.description') %> <%= @payment.description %></p>
-<p><%= t('.amount') %> <%= number_to_currency(@payment.amount, :unit => @payment.currency, :format => '%n %u') %></p>
-
-<%= form_tag @swed_request.service_url, :method => :post do %>
-  <% @swed_request.request_params.each do |key, val| %>
-    <%= hidden_field_tag key, val %>
-  <% end %>
-  <%= submit_tag 'Swedbank' %>
-<% end %>
-
-<%= form_tag @seb_request.service_url, :method => :post do %>
-  <% @seb_request.request_params.each do |key, val| %>
-    <%= hidden_field_tag key, val %>
-  <% end %>
-  <%= submit_tag 'SEB' %>
-<% end %>
-
+<%- if @selected_provider.present? -%>
+<script type="text/javascript" charset="utf-8">
+  document.getElementById('payment-provider-<%= @selected_provider %>').submit();
+</script>
+<%- end -%>

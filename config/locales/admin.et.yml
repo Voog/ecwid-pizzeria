@@ -1,0 +1,54 @@
+et:
+  admin:
+    admin:
+      app_settings:
+        app: Rakendus
+        banks: Pangad
+        configured: Seadistatud
+        disabled: Välja lülitatud
+        enabled: Aktiivne
+        estcard: EstCard
+        mailer: Mailiserver
+        not_configured: Seadistamata
+        title: Rakenduse seaded
+
+    bank_messages:
+      index:
+        amount: Summa
+        date: Aeg
+        provider: Pank
+        ref_no: Viitenr.
+        title: Panga sõnumid
+
+      show:
+        amount: Summa
+        date: Kuupäev
+        message: Kirjeldus
+        payment: Makse
+        payment_id: Tehing
+        provider: Pank
+        ref_no: Viitenr
+        sender: Maksja
+        sender_account: Konto
+        sender_name: Nimi
+        title: Panga sõnum
+
+    estcard_messages:
+      index:
+        amount: Summa
+        cuno: Makse
+        date: Aeg
+        description: "Lisainfo/nimi"
+        receipt_no: "Kviitungi nr"
+        respcode: Vastuse kood
+        title: Krediitkaardimaksed
+
+    payments:
+      index:
+        amount: Summa
+        customer_email: Kliendi email
+        date: Aeg
+        description: Kirjeldus
+        order_id: "#"
+        status: Olek
+        title: Maksed

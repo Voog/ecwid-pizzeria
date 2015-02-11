@@ -1,0 +1,7 @@
+<% if @payment && @payment.return_path.present? %>
+  <div class="row text-center">
+    <div class="col-md-8 col-md-offset-2 well well-lg">
+      <%= link_to t('.return_to_store'), @payment.return_path %>
+    </div>
+  </div>
+<% end %>

@@ -1,14 +1,14 @@
 class CreateBankMessages < ActiveRecord::Migration
   def self.up
     create_table :bank_messages do |t|
-      t.string :provider, :null => false
-      t.string :status, :null => false
+      t.string :provider, null: false
+      t.string :status, null: false
       t.integer :payment_id
       t.integer :snd_id
       t.integer :receipt_id
       t.string :stamp
       t.string :transaction_no
-      t.decimal :amount, :precision => 10, :scale => 2
+      t.decimal :amount, precision: 10, scale: 2
       t.string :currency
       t.string :receiver_account
       t.string :receiver_name
