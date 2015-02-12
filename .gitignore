@@ -14,3 +14,6 @@
 /config/database.production.yml
 .ruby-gemset
 .tm_properties
+/config/deploy/*
+!/config/deploy/example_app*
+/custom*

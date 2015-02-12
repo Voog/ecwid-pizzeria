@@ -12,8 +12,17 @@ gem 'jquery-rails'
 
 gem 'figaro', '~> 1.1.0'
 
-gem 'pg', '~> 0.18.1'
-gem 'mysql2', '~> 0.3.17'
+gem 'pg', '~> 0.18.1', group: :postgre
+gem 'mysql2', '~> 0.3.17', group: :mysql
+
+group :development do
+  gem 'capistrano', '~> 3.3.5', require: false
+  gem 'capistrano-multiconfig', '~> 3.0.8', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -22,7 +31,10 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'quiet_assets', '~> 1.1.0'
+end
+
+group :test do
   gem 'rspec-rails', '~> 3.2.0'
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'quiet_assets', '~> 1.1.0'
 end

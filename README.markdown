@@ -58,6 +58,54 @@ https://shop.example.com/payments/estcard
 
 Payments listing and current configuration of the app can be seen in `https://shop.example.com/admin` by using authentication credentials from configuration (`ECWIDSHOP_AUTHENTICATION_USERNAME` and `ECWIDSHOP_AUTHENTICATION_PASSWORD`).
 
+# Deploying application
+
+Application has predefined [Capistrano](https://github.com/capistrano) tasks and some example scripts ([config/deploy/example_app.rb](./config/deploy/example_app.rb) and [config/deploy/example_app](./config/deploy/example_app)).
+
+Add your deployment environment:
+
+```
+config
+|--- deploy
+|--- |--- my_shop
+|--- |--- |--- production.rb
+|--- |--- my_shop.rb
+```
+
+Add configuration for your environment (see example environment):
+
+```
+custom
+|--- my_shop
+|--- |--- config
+|--- |--- |--- certificates
+|--- |--- |--- |--- estcard_live.crt
+|--- |--- |--- |--- seb_bank_cert.pem
+|--- |--- |--- |--- my_shop_key.pem
+|--- |--- |--- application.yml
+|--- |--- |--- banks.yml
+|--- |--- |--- database.yml
+|--- |--- my_shop.rb
+```
+
+Check your server environment:
+
+```
+bundle exec cap my_shop:production check_write_permissions
+```
+
+Setup your custom configuration (see [example environment](./config/deploy/example_app.rb)):
+
+```
+bundle exec cap my_shop:production deploy:upload_configuration
+```
+
+Deploy your application:
+
+```
+bundle exec cap my_shop:production deploy
+```
+
 # Testing
 
 ## Test submit file
