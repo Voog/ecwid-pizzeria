@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
-gem 'ipizza-rails', '~> 2.0.0'
+gem 'ipizza-rails', '~> 2.0.1'
 gem 'will_paginate', '~> 3.0.7'
 
 gem 'sass-rails', '~> 5.0'
