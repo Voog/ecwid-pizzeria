@@ -92,7 +92,7 @@ production:
 
   lhv:
     <<: *lhv
-    service_url: https://lhv.ee/banklink
+    service_url: https://www.lhv.ee/banklink
     login: "<%= ENV['ECWIDSHOP_BANK_LHV_LOGIN'] %>"
     file_cert: "<%= ENV['ECWIDSHOP_BANK_LHV_CERT_PATH'] %>"
     file_key: "<%= ENV['ECWIDSHOP_BANK_LHV_KEY_PATH'] %>"

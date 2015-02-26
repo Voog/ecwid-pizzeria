@@ -35,7 +35,7 @@ class PaymentsController < ApplicationController
   def calculate_request_mac(mac_input)
     if File.file?(EcwidPizzeria::Application.config.estcard.file_key)
       private_key = File.read(EcwidPizzeria::Application.config.estcard.file_key)
-      OpenSSL::PKey::RSA.new(private_key).sign(OpenSSL::Digest::SHA1.new, mac_input).unpack('H*').to_s
+      OpenSSL::PKey::RSA.new(private_key).sign(OpenSSL::Digest::SHA1.new, mac_input).unpack('H*').first
     else
       Rails.logger.error "PaymentsController.calculate_request_mac - EstCard private key (#{EcwidPizzeria::Application.config.estcard.file_cert}) not found!"
       ''
