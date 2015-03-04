@@ -26,7 +26,7 @@ class EstcardController < ApplicationController
 
     if message.valid_mac? && message.success?
       if @payment && !@payment.delivered?
-        @payment.deliver!
+        @payment.send_store_notification! if @payment.deliver!
 
         begin
           PaymentResponseMailer.payment_received(message, @payment).deliver_now
@@ -43,8 +43,13 @@ class EstcardController < ApplicationController
         redirect_to @payment.return_path if @payment.return_path.present?
       end
       flash.now[:notice] = t('estcard.callback.success')
+    elsif bank_response.success?
+      flash.now[:alert] = t('estcard.callback.error')
+      Rails.logger.error "EstcardController.callback: EstcardMessage response was successful but validation fails! ID: #{message.id}; payment_id: {@payment.try(:id)}"
     else
-      @payment.cancel! if @payment && !@payment.cancelled?
+      if @payment && !@payment.cancelled?
+        @payment.send_store_notification! if @payment.cancel!
+      end
       flash.now[:alert] = t('estcard.callback.cancel')
     end
   end

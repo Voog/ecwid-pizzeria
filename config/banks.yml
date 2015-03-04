@@ -47,7 +47,7 @@ development:
 
   nordea:
     <<: *nordea
-    payments_service_url: https://pangalink.net/banklink/nordea
+    payments_service_url: https://netbank.nordea.com/pnbepay/epayn.jsp
     payments_rcv_id: "10520153"
     file_key: nordea_test_priv
 
@@ -102,8 +102,8 @@ production:
 
   nordea:
     <<: *nordea
-    auth_service_url: https://netbank.nordea.com/pnbeid/eidn.jsp
-    auth_rcv_id: "<%= ENV['ECWIDSHOP_BANK_NORDEA_RCV_ID'] %>"
+    payments_service_url: https://netbank.nordea.com/pnbepay/epayn.jsp
+    payments_rcv_id: "<%= ENV['ECWIDSHOP_BANK_NORDEA_RCV_ID'] %>"
     file_key: "<%= ENV['ECWIDSHOP_BANK_NORDEA_KEY_PATH'] %>"
 
   sampo:
@@ -158,8 +158,8 @@ test:
 
   nordea:
     <<: *nordea
-    auth_service_url: https://pangalink.net/banklink/nordea
-    auth_rcv_id: "10520153"
+    payments_service_url: https://pangalink.net/banklink/nordea
+    payments_rcv_id: "10520153"
     file_key: nordea_test_priv
 
   sampo:

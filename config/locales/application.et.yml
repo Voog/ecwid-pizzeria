@@ -3,6 +3,7 @@ et:
     callback:
       success: "Makse on vastu võetud"
       cancel: "Makse tühistati"
+      error: "Probleem makse töötlemisel"
       return_to_store: "Tagasi poe juurde"
 
   ipizza:

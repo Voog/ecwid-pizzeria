@@ -1,5 +1,7 @@
 This application adds Estonian banks ([iPizza payment](https://github.com/Voog/ipizza) gateway) to [Ecwid](http://www.ecwid.com) with small hack using [e-Path](http://kb.ecwid.com/e-Path) payment gateway settings in Ecwid store.
 
+If Ecwid Order API code is added to app config then Ecwid order is delivered/cancelled over [Order API](http://help.ecwid.com/customer/portal/articles/1166917) when payment is delivered/cancelled.
+
 # App configuration
 
 App can be customized by using environmental variables. Check out configuration variable names in configuration files:
@@ -16,6 +18,8 @@ Minimum set of environmental variables for production environment:
 * `ECWIDSHOP_MAILER_NOTIFICATION_EMAIL=store@example.com`
 * `ECWIDSHOP_SECRET_KEY_BASE=long-random-string-3274y23472384y237842y73hwerbhjwfbjhsdbfsygf7r3gfs`
 * `ECWIDSHOP_PROVIDER_RETURN_HOST=https://shop.example.com`
+* `ECWIDSHOP_ECWID_SHOP_ID=123445`
+* `ECWIDSHOP_ECWID_ORDER_API_KEY=kjujujhyhyh`
 
 At least one bank should be enabled (e.g. `ECWIDSHOP_BANK_SWEDBANK_ENABLED=true`) and configured (see [config/banks.yml](./config/banks.yml)).
 
@@ -44,6 +48,8 @@ https://shop.example.com/payments/krediidipank
 https://shop.example.com/payments/nordea
 https://shop.example.com/payments/estcard
 ```
+
+Get your [Ecwid Shop ID](http://help.ecwid.com/customer/portal/articles/1083303-how-to-get-your-store-id) and find your Ecwid Order API key. You can generate this secret key in Ecwid Control Panel, section System Settings → Apps → [Legacy API key](https://my.ecwid.com/cp/CP.html#apps:view=legacy_api).
 
 ## Parameters provided by Ecwid
 

@@ -26,6 +26,29 @@ class Payment < ActiveRecord::Base
     update_attribute(:status, Status::Cancelled)
   end
 
+  def send_store_notification!
+    if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
+      if delivered? || cancelled?
+        url = "https://app.ecwid.com/api/v1/#{EcwidPizzeria::Application.config.app.ecwid.shop_id}/orders"
+        params = {
+          secure_auth_key: EcwidPizzeria::Application.config.app.ecwid.order_api_key,
+          order: order_id,
+          new_payment_status: (delivered? ? 'ACCEPTED' : 'CANCELLED')
+        }
+
+        if Rails.env.production?
+          RestClient.post(url, params, accept: :json)
+        else
+          RestClient.get(url, params.merge(debug: 'yes'), )
+        end
+      end
+    else
+      Rails.logger.warn 'Ecwid Order API is not enabled!'
+    end
+  rescue Exception => e
+    Rails.logger.error "ERROR: Payment.send_store_notification! was failed. Payment id: #{id}, order_id: #{order_id}, status: #{status}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
+  end
+
   private
 
   def set_status

@@ -3,6 +3,7 @@ en:
     callback:
       success: "Payment has been accepted"
       cancel: "Payment has been cancelled"
+      error: "Error on processing payment"
       return_to_store: "Return to store"
 
   ipizza:

@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'jquery-rails'
 gem 'therubyracer', '~> 0.12.1'
+gem 'rest-client', '~> 1.7.3'
 
 gem 'figaro', '~> 1.1.0'
 

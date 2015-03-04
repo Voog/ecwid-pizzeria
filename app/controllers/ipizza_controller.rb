@@ -13,7 +13,7 @@ class IpizzaController < ApplicationController
 
       if bank_response.valid? && bank_response.success?
         if @payment && !@payment.delivered?
-          @payment.deliver!
+          @payment.send_store_notification! if @payment.deliver!
 
           begin
             PaymentResponseMailer.payment_received(bank_message, @payment).deliver_now
@@ -30,8 +30,13 @@ class IpizzaController < ApplicationController
           redirect_to @payment.return_path if @payment.return_path.present?
         end
         flash.now[:notice] = t('ipizza.callback.success')
+      elsif bank_response.success?
+        flash.now[:alert] = t('ipizza.callback.error')
+        Rails.logger.error "IpizzaController.callback: BankMessage response was successful but validation fails! ID: #{bank_message.id}; payment_id: {@payment.try(:id)}"
       else
-        @payment.cancel! if @payment && !@payment.cancelled?
+        if @payment && !@payment.cancelled?
+          @payment.send_store_notification! if @payment.cancel!
+        end
         flash.now[:alert] = t('ipizza.callback.cancel')
       end
     else

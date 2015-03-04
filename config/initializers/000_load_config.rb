@@ -14,6 +14,12 @@ EcwidPizzeria::Application.configure do
   config.app.shop_external_host = URI.parse(config.app.shop_external_url).host || ''
   config.app.return_host = ENV['ECWIDSHOP_PROVIDER_RETURN_HOST']
 
+  # Setup Ecwid Order API access
+  config.app.ecwid = OpenStruct.new
+  config.app.ecwid.shop_id = ENV['ECWIDSHOP_ECWID_SHOP_ID'].presence
+  config.app.ecwid.order_api_key = ENV['ECWIDSHOP_ECWID_ORDER_API_KEY'].presence
+  config.app.ecwid.order_api_enabled = config.app.ecwid.shop_id.present? && config.app.ecwid.order_api_key.present?
+
   # Set certificates root
   config.app.certs_root = if ENV['ECWIDSHOP_CERTS_FULL_ROOT'].present? && Dir.exist?(ENV['ECWIDSHOP_CERTS_FULL_ROOT'])
     ENV['ECWIDSHOP_CERTS_FULL_ROOT']
