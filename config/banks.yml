@@ -11,6 +11,7 @@ default:
     payments_return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/return
     payments_reject_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/reject
     payments_cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/cancel
+    payments_language: "4"
     auth_language: "ET"
     confirm: "YES"
     keyvers: "0001"
@@ -46,8 +47,8 @@ development:
 
   nordea:
     <<: *nordea
-    auth_service_url: https://pangalink.net/banklink/nordea
-    auth_rcv_id: "10520153"
+    payments_service_url: https://pangalink.net/banklink/nordea
+    payments_rcv_id: "10520153"
     file_key: nordea_test_priv
 
   sampo:

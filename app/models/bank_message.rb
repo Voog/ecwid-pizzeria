@@ -5,7 +5,7 @@ class BankMessage < ActiveRecord::Base
   def self.create_from_params!(params, payment_response)
     info = payment_response.payment_info
     create! do |e|
-      e.provider = info.provider
+      e.provider = info.provider || params[:provider]
       e.payment_id = info.stamp
       e.snd_id = info.provider
       e.status = ((payment_response.valid? && payment_response.success?) ? 'DELIVERED' : 'PENDING')

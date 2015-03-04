@@ -3,7 +3,7 @@ class IpizzaController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def callback
-    provider = Ipizza::Provider.get(params['VK_SND_ID'].to_s)
+    provider = Ipizza::Provider.get(params['VK_SND_ID'].presence || params[:provider])
 
     if provider.present?
       bank_response = provider.payment_response(params)
