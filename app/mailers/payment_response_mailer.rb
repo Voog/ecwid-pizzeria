@@ -1,6 +1,8 @@
 class PaymentResponseMailer < ActionMailer::Base
 
-  default from: EcwidPizzeria::Application.config.app.mailer.default_from
+  default from: EcwidPizzeria::Application.config.app.mailer.default_from,
+    reply_to: EcwidPizzeria::Application.config.app.mailer.default_from,
+    return_path: Mail::Address.new(EcwidPizzeria::Application.config.app.mailer.default_from).address
 
   def payment_received(bank_message, payment)
     @bank_message = bank_message
