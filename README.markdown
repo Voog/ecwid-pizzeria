@@ -106,6 +106,29 @@ Deploy your application:
 bundle exec cap my_shop:production deploy
 ```
 
+# Server setup
+
+Note: For using environmental variables. Ensure that your web server is using UTF-8 encoding for environmental variables.
+
+## Example setup for Apache2.
+
+Disable default `LANG=C` value and enable system default.
+
+```
+sudo nano /etc/apache2/envvars
+```
+
+```
+...
+
+## The locale used by some modules like mod_dav
+# export LANG=C
+## Uncomment the following line to use the system default locale instead:
+. /etc/default/locale
+
+...
+```
+
 # Testing
 
 ## Test submit file
