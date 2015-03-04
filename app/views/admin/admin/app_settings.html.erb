@@ -14,6 +14,12 @@
       <% end %>
       <b>Payment message format:</b> <%= t('labels.payment.message', shop_name: EcwidPizzeria::Application.config.app.shop_name, order_id: 999, payment_id: 24) %>
     </p>
+    <p>
+      <b>Ecwid Order API access:</b><br/>
+      <% %w(order_api_enabled shop_id order_api_key).each do |key| %>
+        <b><%= key.humanize %>:</b> <%= @app_conf.ecwid.send(key) %><br/>
+      <% end %>
+    </p>
   </div>
 
   <div class="col-md-6">
