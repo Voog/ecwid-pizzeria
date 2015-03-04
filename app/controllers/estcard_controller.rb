@@ -27,8 +27,19 @@ class EstcardController < ApplicationController
     if message.valid_mac? && message.success?
       if @payment && !@payment.delivered?
         @payment.deliver!
-        PaymentResponseMailer.payment_received(message, @payment).deliver_now
-        PaymentResponseMailer.payment_confirmation(message, @payment).deliver_now
+
+        begin
+          PaymentResponseMailer.payment_received(message, @payment).deliver_now
+        rescue Exception => e
+          Rails.logger.error "ERROR: PaymentResponseMailer.payment_received was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
+        end
+
+        begin
+          PaymentResponseMailer.payment_confirmation(message, @payment).deliver_now
+        rescue Exception => e
+          Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
+        end
+
         redirect_to @payment.return_path if @payment.return_path.present?
       end
       flash.now[:notice] = t('estcard.callback.success')
