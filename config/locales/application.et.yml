@@ -36,7 +36,7 @@ et:
       USD: "$"
 
     payment:
-      message: "%{shop_name} e-poe tellimus #%{order_id} (%{payment_id})"
+      message: "%{shop_name} e-poe tellimus nr %{order_id} (%{payment_id})"
       status:
         cancelled: Tühistatud
         created: Loodud

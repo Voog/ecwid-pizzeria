@@ -36,7 +36,7 @@ en:
       USD: "$"
 
     payment:
-      message: "%{shop_name} E-Shop order #%{order_id} (%{payment_id})"
+      message: "%{shop_name} E-Shop order no %{order_id} (%{payment_id})"
       status:
         cancelled: Cancelled
         created: Created
