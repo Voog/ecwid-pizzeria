@@ -39,8 +39,6 @@ class EstcardController < ApplicationController
         rescue Exception => e
           Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
         end
-
-        redirect_to @payment.return_path if @payment.return_path.present?
       end
       flash.now[:notice] = t('estcard.callback.success')
     elsif bank_response.success?
@@ -52,5 +50,7 @@ class EstcardController < ApplicationController
       end
       flash.now[:alert] = t('estcard.callback.cancel')
     end
+
+    redirect_to @payment.store_return_url if @payment && @payment.delivered? && @payment.store_return_url.present? && params[:auto] != 'Y'
   end
 end

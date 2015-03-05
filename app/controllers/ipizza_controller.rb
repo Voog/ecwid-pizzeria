@@ -26,8 +26,6 @@ class IpizzaController < ApplicationController
           rescue Exception => e
             Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
           end
-
-          redirect_to @payment.return_path if @payment.return_path.present?
         end
         flash.now[:notice] = t('ipizza.callback.success')
       elsif bank_response.success?
@@ -43,5 +41,7 @@ class IpizzaController < ApplicationController
       flash.now[:alert] = t('ipizza.callback.error')
       Rails.logger.error "IpizzaController.callback: Provider '#{params['VK_SND_ID'].to_s}' not found!"
     end
+
+    redirect_to @payment.store_return_url if @payment && @payment.delivered? && @payment.store_return_url.present? && !bank_response.automatic_message?
   end
 end

@@ -26,6 +26,20 @@ class Payment < ActiveRecord::Base
     update_attribute(:status, Status::Cancelled)
   end
 
+  def store_return_url
+    if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
+      if EcwidPizzeria::Application.config.app.shop_external_url.present?
+        if opt.present? && (delivered? || cancelled?)
+          "#{EcwidPizzeria::Application.config.app.shop_external_url}#!/~/checkoutResult/#{opt_to_param}"
+        else
+          EcwidPizzeria::Application.config.app.shop_external_url
+        end
+      end
+    else
+      delivered? ? return_path : EcwidPizzeria::Application.config.app.shop_external_url
+    end
+  end
+
   def send_store_notification!
     if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
       if delivered? || cancelled?
@@ -50,6 +64,12 @@ class Payment < ActiveRecord::Base
   end
 
   private
+
+  def opt_to_param
+    'id=%s&tc=%s' % opt.to_s.split(';')
+  rescue
+    ''
+  end
 
   def set_status
     write_attribute(:status, Status::Created) if status.blank?

@@ -1,7 +1,7 @@
-<% if @payment && @payment.return_path.present? %>
+<% if @payment && @payment.store_return_url.present? %>
   <div class="row text-center">
     <div class="col-md-8 col-md-offset-2 well well-lg">
-      <%= link_to t('.return_to_store'), (@payment.delivered? ? @payment.return_path : EcwidPizzeria::Application.config.app.shop_external_url) %>
+      <%= link_to t('.return_to_store'), @payment.store_return_url %>
     </div>
   </div>
 <% end %>
