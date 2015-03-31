@@ -69,7 +69,7 @@ class PaymentsController < ApplicationController
         val
       when %r(\A(#{EcwidPizzeria::Application.config.banks.enabled.join('|')}*?)\s(pank|bank)\z)
         $1
-      when 'danskebank', 'dnb'
+      when 'danskebank', 'dnb', 'danske', 'danske bank', 'danske pank'
         'sampo'
       end
     end
