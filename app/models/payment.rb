@@ -57,7 +57,7 @@ class Payment < ActiveRecord::Base
         if Rails.env.production?
           RestClient.post(url, params, accept: :json)
         else
-          RestClient.get(url, params.merge(debug: 'yes'), )
+          RestClient.get(url, params: params.merge(debug: 'yes'))
         end
       end
     else

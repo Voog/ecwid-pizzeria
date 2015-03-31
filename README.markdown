@@ -49,6 +49,14 @@ https://shop.example.com/payments/nordea
 https://shop.example.com/payments/estcard
 ```
 
+You can also enable automatic detection by Ecwid shopping cart paymentMethod name. To use auto detection then you need to set your e-Path url to "auto" endpoint:
+
+```
+https://shop.example.com/payments/auto
+```
+
+and your payment method names should be match one of enabled bank name (accepted values "SEB", "SEB pank", "SEB bank").
+
 Get your [Ecwid Shop ID](http://help.ecwid.com/customer/portal/articles/1083303-how-to-get-your-store-id) and find your Ecwid Order API key. You can generate this secret key in Ecwid Control Panel, section System Settings → Apps → [Legacy API key](https://my.ecwid.com/cp/CP.html#apps:view=legacy_api).
 
 ## Parameters provided by Ecwid

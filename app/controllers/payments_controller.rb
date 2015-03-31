@@ -43,11 +43,37 @@ class PaymentsController < ApplicationController
   end
 
   def set_selected_provider
+    autodetect_selected_provider if params[:provider] == 'auto' && params[:ord].present?
+
     @selected_provider = case params[:provider]
     when 'estcard'
       params[:provider] if EcwidPizzeria::Application.config.estcard.enabled
     when *EcwidPizzeria::Application.config.banks.enabled
       params[:provider]
     end
+  end
+
+  # Allow payments auto detection
+  def autodetect_selected_provider
+    Rails.logger.debug "==="
+    if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
+      params[:provider]
+
+      url = "https://app.ecwid.com/api/v1/#{EcwidPizzeria::Application.config.app.ecwid.shop_id}/orders"
+      api_params = {secure_auth_key: EcwidPizzeria::Application.config.app.ecwid.order_api_key, order: params[:ord]}
+      order = RestClient.get(url, params: api_params)
+      val = JSON.parse(order)['orders'].first['paymentMethod'].to_s.downcase.strip
+
+      params[:provider] = case val
+      when *(EcwidPizzeria::Application.config.banks.enabled + ['estcard'])
+        val
+      when %r(\A(#{EcwidPizzeria::Application.config.banks.enabled.join('|')}*?)\s(pank|bank)\z)
+        $1
+      when 'danskebank', 'dnb'
+        'sampo'
+      end
+    end
+  rescue
+    nil
   end
 end
