@@ -32,6 +32,13 @@
   </table>
   </div>
 </div>
+<%- if @selected_provider.present? -%>
+  <div class="row bank-redirecting">
+    <div class="col-md-8 col-md-offset-2">
+      <%= t('.redirecting') %>
+    </div>
+  </div>
+<% end %>
 <div class="row text-center payment-banks">
   <div class="col-md-6 col-md-offset-3">
     <ul class="list-inline">
@@ -63,6 +70,8 @@
 </div>
 
 <%- if @selected_provider.present? -%>
+<% content_for :body_class, 'auto-submit' %>
+<% content_for :disable_js, true %>
 <script type="text/javascript" charset="utf-8">
   document.getElementById('payment-provider-<%= @selected_provider %>').submit();
 </script>

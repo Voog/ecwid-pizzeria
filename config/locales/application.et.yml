@@ -19,6 +19,7 @@ et:
       item_amount: "Kogus"
       description: "Makse kirjeldus:"
       amount: "Kokku:"
+      redirecting: "Panka suunamine ..."
       title: Palun vali makseviis
 
   labels:

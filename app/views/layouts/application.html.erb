@@ -12,10 +12,10 @@
       <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <%= content_tag :body, class: (yield(:body_class) if content_for?(:body_class)) do %>
     <div class="container" style="margin-top: 80px;">
       <%= render 'shared/flash' %>
-      <div class="row">
+      <div class="row header-title">
         <div class="col-md-8 col-md-offset-2">
           <h1>
             <%= EcwidPizzeria::Application.config.app.shop_name.presence || t('.title') %>
@@ -35,6 +35,6 @@
       </div>
       <% end %>
     </div>
-    <%= javascript_include_tag 'application' %>
-  </body>
+    <%= javascript_include_tag 'application' if yield(:disable_js) != 'true' %>
+  <% end %>
 </html>
