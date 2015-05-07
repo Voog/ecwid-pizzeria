@@ -31,16 +31,16 @@ class Payment < ActiveRecord::Base
     if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
       # When Ecwid API is configured then delivering/cancelling notification is sent over API.
       # So we redirect user back to shop site Ecwid checkout page if external shop url is present
-      if EcwidPizzeria::Application.config.app.shop_external_url.present?
+      if EcwidPizzeria::Application.config.app.shop_external_return_url.present?
         if opt.present? && (delivered? || cancelled?)
-          "#{EcwidPizzeria::Application.config.app.shop_external_url}#!/~/checkoutResult/#{opt_to_param}"
+          "#{EcwidPizzeria::Application.config.app.shop_external_return_url}#!/~/checkoutResult/#{opt_to_param}"
         else
-          EcwidPizzeria::Application.config.app.shop_external_url
+          EcwidPizzeria::Application.config.app.shop_external_return_url
         end
       end
     else
       # If Ecwid API is not enabled then redirect user back to ePath url if payment is delivered
-      delivered? ? return_path : EcwidPizzeria::Application.config.app.shop_external_url
+      delivered? ? return_path : EcwidPizzeria::Application.config.app.shop_external_return_url
     end
   end
 

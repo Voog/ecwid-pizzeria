@@ -14,6 +14,7 @@ Minimum set of environmental variables for production environment:
 
 * `ECWIDSHOP_SHOP_NAME="My eShop"`
 * `ECWIDSHOP_SHOP_EXTERNAL_URL=http://example.com`
+* `ECWIDSHOP_SHOP_EXTERNAL_RETURN_URL=http://example.com/cart`
 * `ECWIDSHOP_MAILER_DEFAULT_FROM="Ecwid eShop <store@example.com>"`
 * `ECWIDSHOP_MAILER_NOTIFICATION_EMAIL=store@example.com`
 * `ECWIDSHOP_SECRET_KEY_BASE=long-random-string-3274y23472384y237842y73hwerbhjwfbjhsdbfsygf7r3gfs`

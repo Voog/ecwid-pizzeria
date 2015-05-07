@@ -12,6 +12,11 @@ EcwidPizzeria::Application.configure do
     ''
   end
   config.app.shop_external_host = URI.parse(config.app.shop_external_url).host || ''
+  config.app.shop_external_return_url = if ENV['ECWIDSHOP_SHOP_EXTERNAL_RETURN_URL'].present?
+    ENV['ECWIDSHOP_SHOP_EXTERNAL_RETURN_URL'].to_s =~ /\Ahttps?\:\/\/.*?\z/i ? ENV['ECWIDSHOP_SHOP_EXTERNAL_RETURN_URL'] : "http://#{ENV['ECWIDSHOP_SHOP_EXTERNAL_RETURN_URL']}"
+  else
+    config.app.shop_external_url
+  end
   config.app.return_host = ENV['ECWIDSHOP_PROVIDER_RETURN_HOST']
 
   # Setup Ecwid Order API access
