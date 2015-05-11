@@ -10,7 +10,7 @@ class DiscountsController < ApplicationController
       result = EcwidApi::PagedEcwidResponse.new(client, 'discount_coupons', availability: 'ACTIVE', code: params[:id], limit: 1).first
 
       if result.present?
-        render json: result, status: :not_found
+        render json: result
       else
         render json: {message: 'Not found.'}, status: :not_found
       end
