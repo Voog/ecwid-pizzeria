@@ -15,6 +15,7 @@ gem 'rest-client', '~> 1.7.3'
 gem 'ecwid_api', git: 'https://github.com/davidbiehl/ecwid_api.git', ref: '5a5d4e8241168f484fe2690d96e42138675bf4ee', require: false
 
 gem 'figaro', '~> 1.1.0'
+gem 'rack-cors', '~> 0.4.0'
 
 gem 'pg', '~> 0.18.1', group: :postgre
 gem 'mysql2', '~> 0.3.17', group: :mysql
