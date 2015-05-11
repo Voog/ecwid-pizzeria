@@ -41,7 +41,7 @@ class EstcardController < ApplicationController
         end
       end
       flash.now[:notice] = t('estcard.callback.success')
-    elsif bank_response.success?
+    elsif message.success?
       flash.now[:alert] = t('estcard.callback.error')
       Rails.logger.error "EstcardController.callback: EstcardMessage response was successful but validation fails! ID: #{message.id}; payment_id: {@payment.try(:id)}"
     else
