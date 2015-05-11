@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:davidbiehl/ecwid_api.git
+  remote: https://github.com/davidbiehl/ecwid_api.git
   revision: 5a5d4e8241168f484fe2690d96e42138675bf4ee
   ref: 5a5d4e8241168f484fe2690d96e42138675bf4ee
   specs:
