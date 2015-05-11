@@ -24,6 +24,9 @@ EcwidPizzeria::Application.configure do
   config.app.ecwid.shop_id = ENV['ECWIDSHOP_ECWID_SHOP_ID'].presence
   config.app.ecwid.order_api_key = ENV['ECWIDSHOP_ECWID_ORDER_API_KEY'].presence
   config.app.ecwid.order_api_enabled = config.app.ecwid.shop_id.present? && config.app.ecwid.order_api_key.present?
+  # Setup Ecwid API v3 (http://api.ecwid.com)
+  config.app.ecwid.api3_access_token = ENV['ECWIDSHOP_ECWID_API3_ACCESS_TOKEN'].presence
+  config.app.ecwid.api3_api_enabled = config.app.ecwid.shop_id.present? && config.app.ecwid.api3_access_token.present?
 
   # Set certificates root
   config.app.certs_root = if ENV['ECWIDSHOP_CERTS_FULL_ROOT'].present? && Dir.exist?(ENV['ECWIDSHOP_CERTS_FULL_ROOT'])

@@ -73,6 +73,66 @@ Get your [Ecwid Shop ID](http://help.ecwid.com/customer/portal/articles/1083303-
 
 Payments listing and current configuration of the app can be seen in `https://shop.example.com/admin` by using authentication credentials from configuration (`ECWIDSHOP_AUTHENTICATION_USERNAME` and `ECWIDSHOP_AUTHENTICATION_PASSWORD`).
 
+# Optional discount validation
+
+Application supports optional Ecwid discount code validation using [Ecwidy API v3](http://api.ecwid.com).
+
+Usage:
+
+```
+/discounts/MYCODE
+```
+
+It returns existing active [discount code object](http://api.ecwid.com/#search-coupons). Otherwise it returns not found response.
+
+**Setup:**
+
+Request access to [Ecwid API v3](http://api.ecwid.com#register-your-app-in-ecwid). You need access to `read_discount_coupons` scope.
+
+Login to your Ecwid account.
+
+**Step 1.** Go to  Ecwid's oAuth endpoint to get access authorize your app. Enter the url:
+
+```
+https://my.ecwid.com/api/oauth/authorize?client_id=MY-CLIENT-ID&redirect_uri=http%3A%2F%2Fwww.myshop.com%2Fapi&response_type=code&scope=read_discount_coupons
+```
+
+**Step 2.** You are redirected to url specified in `redirect_uri` parameter. Grab the code form response url. Example:
+
+```
+http://www.myshop.com/api?code=SOME-RANDOM-CODE
+```
+
+
+**Step 3.** Retrieve access_token from Ecwid
+
+```
+curl "https://my.ecwid.com/api/oauth/token" \
+-XPOST \
+-d client_id=MY-CLIENT-ID \
+-d client_secret=CLIENT-SECRET-KEY \
+-d code=SOME-RANDOM-CODE \
+-d redirect_uri=http%3A%2F%2Fwww.myshop.com%2Fapi \
+-d grant_type=authorization_code
+```
+
+Example response:
+
+```
+{
+  "access_token": "MY-APP-ACCESS-TOKEN-FOR-DISCOUNTS",
+  "token_type": "Bearer",
+  "scope":"read_store_profile read_discount_coupons",
+  "store_id": 11111
+}
+```
+
+**Step 4.** Updated your `application.yml` file to enableAPI 3 access
+
+```
+ECWIDSHOP_ECWID_API3_ACCESS_TOKEN: "MY-APP-ACCESS-TOKEN-FOR-DISCOUNTS"
+```
+
 # Deploying application
 
 Application has predefined [Capistrano](https://github.com/capistrano) tasks and some example scripts ([config/deploy/example_app.rb](./config/deploy/example_app.rb) and [config/deploy/example_app](./config/deploy/example_app)).

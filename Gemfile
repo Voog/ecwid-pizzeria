@@ -11,6 +11,8 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'jquery-rails'
 gem 'therubyracer', '~> 0.12.1'
 gem 'rest-client', '~> 1.7.3'
+# Ecwid API v3
+gem 'ecwid_api', git: 'git@github.com:davidbiehl/ecwid_api.git', ref: '5a5d4e8241168f484fe2690d96e42138675bf4ee', require: false
 
 gem 'figaro', '~> 1.1.0'
 
