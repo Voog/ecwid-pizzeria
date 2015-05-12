@@ -6,8 +6,11 @@ class DiscountsController < ApplicationController
 
   def show
     if EcwidPizzeria::Application.config.app.ecwid.api3_api_enabled
+      code = params[:id].to_s.downcase
       client = EcwidApi::Client.new(EcwidPizzeria::Application.config.app.ecwid.shop_id, EcwidPizzeria::Application.config.app.ecwid.api3_access_token)
-      result = EcwidApi::PagedEcwidResponse.new(client, 'discount_coupons', availability: 'ACTIVE', code: params[:id], limit: 1).first
+      result = EcwidApi::PagedEcwidResponse.new(client, 'discount_coupons', availability: 'ACTIVE', code: code, limit: 30).detect do |row|
+        row['code'].to_s.downcase == code
+      end
 
       if result.present?
         render json: result
