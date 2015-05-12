@@ -1,18 +1,4 @@
 en:
-  estcard:
-    callback:
-      success: "Payment has been accepted"
-      cancel: "Payment has been cancelled"
-      error: "Error on processing payment"
-      return_to_store: "Return to store"
-
-  ipizza:
-    callback:
-      success: "Payment has been accepted"
-      cancel: "Payment has been cancelled"
-      error: "Error on processing payment"
-      return_to_store: "Return to store"
-
   payments:
     create:
       item_name: "Product"
@@ -28,6 +14,7 @@ en:
       krediidipank: Krediidipank
       lhv: LHV Pank
       nordea: Nordea
+      paypal: PayPal
       sampo: Danske Bank
       seb: SEB
       swedbank: Swedbank
@@ -59,7 +46,14 @@ en:
         payments: Payments
         bank_messages: Bank messags
         estcard_messages: Credit card payments
+        paypal_messages: PayPal payments
         app_settings: App settings
+    callback:
+      success: "Payment has been accepted"
+      cancel: "Payment has been cancelled"
+      error: "Error on processing payment"
+      pending: "Your payment is not processes yet. You will be notified by email when your payment is done."
+      return_to_store: "Return to store"
 
   time:
     formats:

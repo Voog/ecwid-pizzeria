@@ -82,6 +82,16 @@ EcwidPizzeria::Application.configure do
     file_key: File.join(config.app.certs_root, estcard_conf.fetch('file_key', ''))
   )
 
+  # Load PayPal related configuration
+  paypal_conf = ipizza_conf.fetch('paypal', {})
+  config.paypal = OpenStruct.new(
+    enabled: ENV['ECWIDSHOP_PAYPAL_ENABLED'].to_s.downcase == 'true',
+    service_url: paypal_conf.fetch('service_url', ''),
+    login: paypal_conf.fetch('login', ''),
+    return_url: "#{config.app.return_host}/paypal/callback",
+    notify_url: "#{config.app.return_host}/paypal/callback"
+  )
+
   # Setup email delivering
   config.action_mailer.delivery_method = ENV['ECWIDSHOP_MAILER_DELIVERY_METHOD'].downcase.to_sym if ENV['ECWIDSHOP_MAILER_DELIVERY_METHOD'].present?
   # Setup SMTP settings

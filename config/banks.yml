@@ -81,6 +81,10 @@ development:
     file_cert: pangalink_estcard_bank_cert.pem
     file_key: pangalink_estcard_user_key.pem
 
+  paypal:
+    service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
+    login: info@myshop.com
+
 production:
   krediidipank:
     <<: *krediidipank
@@ -139,6 +143,10 @@ production:
     file_cert: "<%= ENV['ECWIDSHOP_ESTCARD_CERT_PATH'] %>"
     file_key: "<%= ENV['ECWIDSHOP_ESTCARD_KEY_PATH'] %>"
 
+  paypal:
+    service_url: https://www.paypal.com/cgi-bin/webscr
+    login: info@myshop.com
+
 test:
   krediidipank:
     <<: *krediidipank
@@ -192,3 +200,7 @@ test:
     merchant_id: uid520289
     file_cert: pangalink_estcard_bank_cert.pem
     file_key: pangalink_estcard_user_key.pem
+
+  paypal:
+    service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
+    login: info@myshop.com

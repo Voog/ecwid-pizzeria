@@ -10,6 +10,7 @@ et:
         estcard: EstCard
         mailer: Mailiserver
         not_configured: Seadistamata
+        paypal: PayPal
         title: Rakenduse seaded
 
     bank_messages:
@@ -52,3 +53,18 @@ et:
         order_id: "#"
         status: Olek
         title: Maksed
+
+    paypal_messages:
+      index:
+        title: PayPal maksed
+        id: ID
+        order_id: Tellimus
+        txn_id: Tehingu ID
+        payer_name: Maksja nimi
+        payer_email: Maksja email
+        payer_id: Maksja ID
+        amount: Summa
+        payment_status: Staatus
+        pending_reason: Ooteloleku põhjus
+        item_name: Kirjeldus
+        payment_date: Aeg

@@ -65,6 +65,26 @@
           <% end %>
         </li>
       <% end %>
+      <% if EcwidPizzeria::Application.config.paypal.enabled %>
+        <li>
+          <%= form_tag EcwidPizzeria::Application.config.paypal.service_url, id: 'payment-provider-paypal' do %>
+            <%= hidden_field_tag :business, @paypal_payment.business %>
+            <%= hidden_field_tag :email, @paypal_payment.email %>
+            <%= hidden_field_tag :invoice, @paypal_payment.invoice %>
+            <%= hidden_field_tag :amount, @paypal_payment.amount %>
+            <%= hidden_field_tag :custom, @paypal_payment.custom %>
+            <%= hidden_field_tag :item_name, @paypal_payment.item_name %>
+            <%= hidden_field_tag :item_number, @paypal_payment.item_number %>
+            <%= hidden_field_tag :currency_code, @paypal_payment.currency_code %>
+            <%= hidden_field_tag :quantity, @paypal_payment.quantity %>
+            <%= hidden_field_tag :cmd, @paypal_payment.cmd %>
+            <%= hidden_field_tag :notify_url, @paypal_payment.notify_url %>
+            <%= hidden_field_tag :return, @paypal_payment.return %>
+            <%= hidden_field_tag :cancel_return, @paypal_payment.cancel_return %>
+            <%= image_submit_tag 'paypal.png', alt: t('labels.banks.paypal'), alt: t('labels.banks.paypal') %>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

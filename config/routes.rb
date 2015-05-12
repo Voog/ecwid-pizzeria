@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :estcard_messages
     resources :payments
     resources :bank_messages
+    resources :paypal_messages
     get :app_settings, to: 'admin#app_settings'
   end
 
@@ -15,4 +16,5 @@ Rails.application.routes.draw do
   match '/payments(/:provider)', to: 'payments#create', via: [:post]
   match '/ipizza/callback/:provider(/:result)', to: 'ipizza#callback', via: [:get, :post]
   match '/estcard/callback', to: 'estcard#callback', via: [:get, :post]
+  match '/paypal/callback', to: 'paypal#callback', via: [:get, :post]
 end

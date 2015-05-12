@@ -55,6 +55,11 @@
     <% %w(enabled merchant_id file_cert file_key service_url).each do |key| %>
       <b><%= key.humanize %>:</b> <%= @estcard_conf.send(key) %><br/>
     <% end %>
+    <br>
+    <h3><%= t('.paypal') %></h3>
+    <% %w(enabled login service_url).each do |key| %>
+      <b><%= key.humanize %>:</b> <%= @paypal_conf.send(key) %><br/>
+    <% end %>
   </div>
 </div>
 <br>

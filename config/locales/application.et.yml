@@ -1,18 +1,4 @@
 et:
-  estcard:
-    callback:
-      success: "Makse on vastu võetud"
-      cancel: "Makse tühistati"
-      error: "Probleem makse töötlemisel"
-      return_to_store: "Tagasi poe juurde"
-
-  ipizza:
-    callback:
-      success: "Makse on vastu võetud"
-      cancel: "Makse tühistati"
-      error: "Probleem makse töötlemisel"
-      return_to_store: "Tagasi poe juurde"
-
   payments:
     create:
       item_name: "Toode"
@@ -28,6 +14,7 @@ et:
       krediidipank: Krediidipank
       lhv: LHV Pank
       nordea: Nordea
+      paypal: PayPal
       sampo: Danske Bank
       seb: SEB
       swedbank: Swedbank
@@ -58,7 +45,14 @@ et:
         payments: Maksed
         bank_messages: Pangateated
         estcard_messages: Krediitkaardimaksed
+        paypal_messages: PayPal maksed
         app_settings: Rakenduse andmed
+    callback:
+      success: "Makse on vastu võetud"
+      cancel: "Makse tühistati"
+      error: "Probleem makse töötlemisel"
+      pending: "Makse on veel töötlemisel. Makse laekumisel teavitatakse teid emaili teel."
+      return_to_store: "Tagasi poodi"
 
   time:
     formats:

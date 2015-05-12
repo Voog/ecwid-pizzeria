@@ -28,6 +28,9 @@ et:
       time: Time
       message_data: Message data
       action_text: Action text
+      payer_id: Payer id
+      payer_email: Payer email
+      receiver_email: Receiver email
 
     payment_confirmation:
       subject: "Your %{shop_name} E-Store payment confirmation"

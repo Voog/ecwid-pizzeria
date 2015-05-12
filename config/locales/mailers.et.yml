@@ -28,6 +28,9 @@ et:
       time: Aeg
       message_data: Panga teade
       action_text: Toimingu tekst
+      payer_id: Maksja id
+      payer_email: Maksja email
+      receiver_email: Saaja email
 
     payment_confirmation:
       subject: "Teie %{shop_name} e-poe makse kinnitus"

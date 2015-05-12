@@ -28,6 +28,14 @@ class PaymentsController < ApplicationController
 
       @estcard_request.mac = calculate_request_mac(@estcard_request.mac_input)
     end
+
+    if EcwidPizzeria::Application.config.paypal.enabled
+      @paypal_payment = Paypal.new(
+        invoice: @payment.id, amount: @payment.amount, custom: @payment.order_id,
+        item_name: t('labels.payment.message', shop_name: EcwidPizzeria::Application.config.app.shop_name, order_id: @payment.order_id, payment_id: @payment.id).strip,
+        email: @payment.customer_email, currency: @payment.currency
+      )
+    end
   end
 
   private
@@ -48,6 +56,8 @@ class PaymentsController < ApplicationController
     @selected_provider = case params[:provider]
     when 'estcard'
       params[:provider] if EcwidPizzeria::Application.config.estcard.enabled
+    when 'paypal'
+      params[:provider] if EcwidPizzeria::Application.config.paypal.enabled
     when *EcwidPizzeria::Application.config.banks.enabled
       params[:provider]
     end
@@ -55,7 +65,6 @@ class PaymentsController < ApplicationController
 
   # Allow payments auto detection
   def autodetect_selected_provider
-    Rails.logger.debug "==="
     if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
       params[:provider]
 
@@ -65,7 +74,7 @@ class PaymentsController < ApplicationController
       val = JSON.parse(order)['orders'].first['paymentMethod'].to_s.downcase.strip
 
       params[:provider] = case val
-      when *(EcwidPizzeria::Application.config.banks.enabled + ['estcard'])
+      when *(EcwidPizzeria::Application.config.banks.enabled + ['estcard', 'paypal'])
         val
       when %r(\A(#{EcwidPizzeria::Application.config.banks.enabled.join('|')}*?)\s(pank|bank)\z)
         $1

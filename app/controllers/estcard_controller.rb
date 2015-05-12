@@ -40,15 +40,15 @@ class EstcardController < ApplicationController
           Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
         end
       end
-      flash.now[:notice] = t('estcard.callback.success')
+      flash.now[:notice] = t('shared.callback.success')
     elsif message.success?
-      flash.now[:alert] = t('estcard.callback.error')
-      Rails.logger.error "EstcardController.callback: EstcardMessage response was successful but validation fails! ID: #{message.id}; payment_id: {@payment.try(:id)}"
+      flash.now[:alert] = t('shared.callback.error')
+      Rails.logger.error "EstcardController.callback: EstcardMessage response was successful but validation fails! ID: #{message.id}; payment_id: #{@payment.try(:id)}"
     else
       if @payment && !@payment.cancelled?
         @payment.send_store_notification! if @payment.cancel!
       end
-      flash.now[:alert] = t('estcard.callback.cancel')
+      flash.now[:alert] = t('shared.callback.cancel')
     end
 
     redirect_to @payment.store_return_url if @payment && @payment.delivered? && @payment.store_return_url.present? && params[:auto] != 'Y'

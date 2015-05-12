@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20120613082435) do
+ActiveRecord::Schema.define(version: 20150511192642) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "bank_messages", force: :cascade do |t|
     t.string   "provider",         limit: 255,                          null: false
@@ -77,5 +81,48 @@ ActiveRecord::Schema.define(version: 20120613082435) do
     t.datetime "updated_at"
     t.string   "currency",       limit: 255
   end
+
+  create_table "paypal_messages", force: :cascade do |t|
+    t.string   "payment_status",                                                  null: false
+    t.string   "pending_reason"
+    t.datetime "payment_date",                                                    null: false
+    t.string   "payment_fee"
+    t.string   "payment_type"
+    t.string   "payment_gross"
+    t.string   "txn_id"
+    t.string   "txn_type"
+    t.string   "item_number"
+    t.string   "item_name"
+    t.string   "business"
+    t.string   "receiver_email"
+    t.string   "receiver_id"
+    t.string   "invoice"
+    t.string   "payer_id"
+    t.string   "payer_email"
+    t.string   "payer_status"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "residence_country"
+    t.string   "transaction_subject"
+    t.string   "quantity"
+    t.decimal  "mc_gross",               precision: 12, scale: 2
+    t.decimal  "mc_fee",                 precision: 12, scale: 2
+    t.string   "mc_currency"
+    t.decimal  "tax",                    precision: 12, scale: 2
+    t.decimal  "shipping",               precision: 12, scale: 2
+    t.decimal  "handling_amount",        precision: 12, scale: 2
+    t.string   "protection_eligibility"
+    t.string   "notify_version"
+    t.string   "verify_sign"
+    t.boolean  "test_ipn",                                        default: false
+    t.string   "validation_status"
+    t.string   "custom"
+    t.text     "request_params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "paypal_messages", ["invoice"], name: "index_paypal_messages_on_invoice", using: :btree
+  add_index "paypal_messages", ["txn_id"], name: "index_paypal_messages_on_txn_id", using: :btree
 
 end

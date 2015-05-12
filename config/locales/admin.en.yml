@@ -10,6 +10,7 @@ en:
         estcard: EstCard
         mailer: Mail server
         not_configured: Not configured
+        paypal: PayPal
         title: Application settings
 
     bank_messages:
@@ -52,3 +53,18 @@ en:
         order_id: "#"
         status: Status
         title: Payments
+
+    paypal_messages:
+      index:
+        title: PayPal maksed
+        id: ID
+        order_id: Order
+        txn_id: Transaction ID
+        payer_name: Payer name
+        payer_email: Payer email
+        payer_id: Payer ID
+        amount: Amount
+        payment_status: Status
+        pending_reason: Pending reason
+        item_name: Description
+        payment_date: Date

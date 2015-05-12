@@ -7,7 +7,7 @@ If Ecwid Order API code is added to app config then Ecwid order is delivered/can
 App can be customized by using environmental variables. Check out configuration variable names in configuration files:
 
 * [config/application.yml](./config/application.yml) - defaults for application variables.
-* [config/banks.yml](./config/banks.yml) - defaults for iPizza and EstCard providers.
+* [config/banks.yml](./config/banks.yml) - defaults for iPizza, EstCard and PayPal providers.
 * [config/secrets.yml](./config/secrets.yml) - defaults for secrets.
 
 Minimum set of environmental variables for production environment:
@@ -48,6 +48,7 @@ https://shop.example.com/payments/sampo
 https://shop.example.com/payments/krediidipank
 https://shop.example.com/payments/nordea
 https://shop.example.com/payments/estcard
+https://shop.example.com/payments/paypal
 ```
 
 You can also enable automatic detection by Ecwid shopping cart paymentMethod name. To use auto detection then you need to set your e-Path url to "auto" endpoint:

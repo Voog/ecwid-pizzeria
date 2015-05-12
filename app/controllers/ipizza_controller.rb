@@ -27,18 +27,18 @@ class IpizzaController < ApplicationController
             Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
           end
         end
-        flash.now[:notice] = t('ipizza.callback.success')
+        flash.now[:notice] = t('shared.callback.success')
       elsif bank_response.success?
-        flash.now[:alert] = t('ipizza.callback.error')
+        flash.now[:alert] = t('shared.callback.error')
         Rails.logger.error "IpizzaController.callback: BankMessage response was successful but validation fails! ID: #{bank_message.id}; payment_id: {@payment.try(:id)}"
       else
         if @payment && !@payment.cancelled?
           @payment.send_store_notification! if @payment.cancel!
         end
-        flash.now[:alert] = t('ipizza.callback.cancel')
+        flash.now[:alert] = t('shared.callback.cancel')
       end
     else
-      flash.now[:alert] = t('ipizza.callback.error')
+      flash.now[:alert] = t('shared.callback.error')
       Rails.logger.error "IpizzaController.callback: Provider '#{params['VK_SND_ID'].to_s}' not found!"
     end
 
