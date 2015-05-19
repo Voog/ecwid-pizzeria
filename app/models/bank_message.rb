@@ -1,16 +1,26 @@
 class BankMessage < ActiveRecord::Base
-  
+
   serialize :params
-  
+
   def self.create_from_params!(params, payment_response)
-    create!(
-      :provider => params['VK_SND_ID'], :payment_id => params['VK_STAMP'], :snd_id => params['VK_SND_ID'],
-      :status => ((payment_response.valid? && payment_response.success?) ? 'DELIVERED' : 'PENDING'),
-      :receipt_id => params['VK_REV_ID'], :stamp => params['VK_STAMP'], :transaction_no => params['VK_T_NO'],
-      :amount => params['VK_AMOUNT'], :currency => params['VK_CURR'], :receiver_account => params['VK_REC_ACC'],
-      :receiver_name => params['VK_REC_NAME'], :sender_account => params['VK_SND_ACC'],
-      :sender_name => params['VK_SND_NAME'], :ref_no => params['VK_REF'], :message => params['VK_MSG'],
-      :params => params
-    )
+    info = payment_response.payment_info
+    create! do |e|
+      e.provider = info.provider || params[:provider]
+      e.payment_id = info.stamp
+      e.snd_id = info.provider
+      e.status = ((payment_response.valid? && payment_response.success?) ? 'DELIVERED' : 'PENDING')
+      e.receipt_id = params['VK_REV_ID']
+      e.stamp = info.stamp
+      e.transaction_no = info.transaction_id
+      e.amount = info.amount
+      e.currency = info.currency
+      e.receiver_account = info.receiver_account
+      e.receiver_name = info.receiver_name
+      e.sender_account = info.sender_account
+      e.sender_name = info.sender_name
+      e.ref_no = info.refnum
+      e.message = info.message
+      e.params = params
+    end
   end
 end

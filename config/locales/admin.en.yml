@@ -1,0 +1,70 @@
+en:
+  admin:
+    admin:
+      app_settings:
+        app: App
+        banks: Banks
+        configured: Configured
+        disabled: Disabled
+        enabled: Enabled
+        estcard: EstCard
+        mailer: Mail server
+        not_configured: Not configured
+        paypal: PayPal
+        title: Application settings
+
+    bank_messages:
+      index:
+        amount: Amount
+        date: Date
+        provider: Bank
+        ref_no: "Ref no."
+        title: Bank messages
+
+      show:
+        amount: Amount
+        date: Date
+        message: Description
+        payment: Payment
+        payment_id: Payment id
+        provider: bank
+        ref_no: "Ref no."
+        sender: Sender
+        sender_account: Sender account
+        sender_name: Sender name
+        title: Bank message
+
+    estcard_messages:
+      index:
+        amount: Amount
+        cuno: Payment
+        date: Date
+        description: "Information/name"
+        receipt_no: "Receipt no"
+        respcode: Response code
+        title: Credit card payments
+
+    payments:
+      index:
+        amount: Amount
+        customer_email: Customer email
+        date: Date
+        description: Description
+        order_id: "#"
+        status: Status
+        title: Payments
+
+    paypal_messages:
+      index:
+        title: PayPal maksed
+        id: ID
+        order_id: Order
+        txn_id: Transaction ID
+        payer_name: Payer name
+        payer_email: Payer email
+        payer_id: Payer ID
+        amount: Amount
+        payment_status: Status
+        pending_reason: Pending reason
+        item_name: Description
+        payment_date: Date

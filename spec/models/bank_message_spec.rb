@@ -1,5 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe BankMessage do
+RSpec.describe BankMessage do
   pending "add some examples to (or delete) #{__FILE__}"
 end

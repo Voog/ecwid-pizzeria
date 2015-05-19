@@ -1,28 +1,57 @@
 <% if @payment %>
-Payment info
+<%= t('.payment_info') %>
 ------------
 
-Description: <%= @payment.description %>
-Amount: <%= @payment.amount %>
-Customer e-mail: <%= @payment.customer_email %>
-Status: <%= @payment.status %>
-ID: <%= @payment.id %>
+<%= t('.order_id') %>: <%= @payment.order_id %>
+<%= t('.description') %>: <%= @payment.description %>
+<%= t('.amount') %>: <%= @payment.amount %>
+<%= t('.customer_email') %>: <%= @payment.customer_email %>
+<%= t('.status') %>: <%= @payment.status %>
+<%= t('.id') %>: <%= @payment.id %>
 <% end %>
 
-<% if @bank_message %>
-Bank message
+<% if @bank_message.is_a?(BankMessage) %>
+<%= t('.bank_message') %>
 ------------
 
-Transaction: <%= @bank_message.transaction_no %>
-Receipt: <%= @bank_message.receipt_id %>
-Amount: <%= @bank_message.amount %> <%= @bank_message.currency %>
-Stamp: <%= @bank_message.stamp %>
-Ref.no: <%= @bank_message.ref_no %>
-Sender name: <%= @bank_message.sender_name %>
-Sender account: <%= @bank_message.sender_account %>
-Receiver name: <%= @bank_message.receiver_name %>
-Receiver account: <%= @bank_message.receiver_account %>
-Message: <%= @bank_message.message %>
-Provider: <%= @bank_message.provider %>
-Status: <%= @bank_message.status %>
+<%= t('.transaction') %>: <%= @bank_message.transaction_no %>
+<%= t('.receipt') %>: <%= @bank_message.receipt_id %>
+<%= t('.amount') %>: <%= @bank_message.amount %> <%= @bank_message.currency %>
+<%= t('.stamp') %>: <%= @bank_message.stamp %>
+<%= t('.ref_no') %>: <%= @bank_message.ref_no %>
+<%= t('.sender_name') %>: <%= @bank_message.sender_name %>
+<%= t('.sender_account') %>: <%= @bank_message.sender_account %>
+<%= t('.receiver_name') %>: <%= @bank_message.receiver_name %>
+<%= t('.receiver_account') %>: <%= @bank_message.receiver_account %>
+<%= t('.message') %>: <%= @bank_message.message %>
+<%= t('.provider') %>: <%= @bank_message.provider %>
+<%= t('.status') %>: <%= @bank_message.status %>
+<% end %>
+
+<% if @bank_message.is_a?(EstcardMessage) %>
+<%= t('.transaction_info') %>
+----------------
+
+<%= t('.payment_id') %>: <%= @bank_message.ecuno %>
+<%= t('.receipt_id') %>: <%= @bank_message.receipt_no %>
+<%= t('.amount') %>: <%= (@bank_message.eamount.to_i / 100) %>
+<%= t('.currency') %>: <%= @bank_message.cur %>
+<%= t('.response_code') %>: <%= @bank_message.respcode %>
+<%= t('.time') %>: <%= @bank_message.datetime %>
+<%= t('.message_data') %>: <%= @bank_message.msgdata %>
+<%= t('.action_text') %>: <%= @bank_message.actiontext %>
+<% end %>
+
+<% if @bank_message.is_a?(PaypalMessage) %>
+<%= t('.transaction_info') %>
+----------------
+
+<%= t('.transaction') %>: <%= @bank_message.txn_id %>
+<%= t('.sender_name') %>: <%= @bank_message.first_name %> <%= @bank_message.last_name %>
+<%= t('.payer_id') %>: <%= @bank_message.payer_id %>
+<%= t('.payer_email') %>: <%= @bank_message.payer_email %>
+<%= t('.receiver_email') %>: <%= @bank_message.receiver_email %>
+<%= t('.time') %>: <%= @bank_message.payment_date %>
+<%= t('.message') %>: <%= @bank_message.item_name %>
+<%= t('.status') %>: <%= @bank_message.payment_status %>
 <% end %>

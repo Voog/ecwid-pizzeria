@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1><%= t('.title') %></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3><%= t('.app') %></h3>
+    <p>
+      <% %w(shop_name certs_root return_host).each do |key| %>
+        <b><%= key.humanize %>:</b> <%= @app_conf.send(key) %><br/>
+      <% end %>
+      <% %w(default_from notification_email).each do |key| %>
+        <b><%= key.humanize %>:</b> <%= @app_conf.mailer.send(key) %><br/>
+      <% end %>
+      <b>Payment message format:</b> <%= t('labels.payment.message', shop_name: EcwidPizzeria::Application.config.app.shop_name, order_id: 999, payment_id: 24) %>
+    </p>
+    <p>
+      <b>Ecwid Order API access:</b><br/>
+      <% %w(order_api_enabled shop_id order_api_key).each do |key| %>
+        <b><%= key.humanize %>:</b> <%= @app_conf.ecwid.send(key) %><br/>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="col-md-6">
+    <h3><%= t('.mailer') %></h3>
+    <b>Delivery method:</b> <%= @mailer_conf.delivery_method %><br/>
+    <% if @mailer_conf.delivery_method == :smtp %>
+      <% @mailer_conf.smtp_settings.each do |k, v| %>
+        <% next if k == :password %>
+        <b><%= k.to_s.humanize %>:</b> <%= v %><br/>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3><%= t('.banks') %></h3>
+    <% @banks_conf.available.each do |code| %>
+      <% bank = @banks_conf.send(code) %>
+      <br>
+      <b><%= code.upcase %></b>
+      <%= bank.enabled ? content_tag(:span, t('.enabled'), class: 'label label-success') : content_tag(:span, t('.disabled'), class: 'label label-default') %>
+      <%= bank.configured ? content_tag(:span, t('.configured'), class: 'label label-success') : content_tag(:span, t('.not_configured'), class: 'label label-default') %>
+      <br>
+      <% (code == 'nordea' ? %w(auth_rcv_id file_key payments_return_url payments_reject_url payments_cancel_url) : %w(login snd_id file_cert file_key encoding service_url return_url cancel_url)).each do |key| %>
+        <b><%= key.humanize %>:</b> <%= bank.settings.send(key) %><br/>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-md-6">
+    <h3><%= t('.estcard') %></h3>
+    <% %w(enabled merchant_id file_cert file_key service_url).each do |key| %>
+      <b><%= key.humanize %>:</b> <%= @estcard_conf.send(key) %><br/>
+    <% end %>
+    <br>
+    <h3><%= t('.paypal') %></h3>
+    <% %w(enabled login service_url).each do |key| %>
+      <b><%= key.humanize %>:</b> <%= @paypal_conf.send(key) %><br/>
+    <% end %>
+  </div>
+</div>
+<br>

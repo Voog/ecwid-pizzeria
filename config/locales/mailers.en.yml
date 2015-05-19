@@ -1,0 +1,48 @@
+et:
+  payment_response_mailer:
+    payment_received:
+      subject: Payment received in store
+      payment_info: Payment info
+      order_id: Order ID
+      description: Description
+      amount: Amount
+      customer_email: Customer e-mail
+      status: Status
+      id: ID
+      bank_message: Bank message
+      transaction: Transaction
+      receipt: Receipt
+      stamp: Stamp
+      ref_no: Ref. no
+      sender_name: Sender name
+      sender_account: Sender account
+      receiver_name: Receiver name
+      receiver_account: Receiver account
+      message: Message
+      provider: Provider
+      transaction_info: Transaction info
+      payment_id: Payment id
+      receipt_id: Receipt id
+      currency: Currency
+      response_code: Response code
+      time: Time
+      message_data: Message data
+      action_text: Action text
+      payer_id: Payer id
+      payer_email: Payer email
+      receiver_email: Receiver email
+
+    payment_confirmation:
+      subject: "Your %{shop_name} E-Store payment confirmation"
+      default_message: |
+        Hi!
+
+        Thank you for your order in %{shop_name} E-Store.
+
+        --- Order from %{shop_name} E-Store ---
+
+        Product name: %{payment_description}
+        Amount paid: %{amount}
+
+        With regards
+        %{shop_name}

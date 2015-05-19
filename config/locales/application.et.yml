@@ -1,0 +1,74 @@
+et:
+  payments:
+    create:
+      item_name: "Toode"
+      item_amount: "Kogus"
+      description: "Makse kirjeldus:"
+      amount: "Kokku:"
+      redirecting: "Panka suunamine ..."
+      title: Palun vali makseviis
+
+  labels:
+    banks:
+      estcard: "Master, VISA"
+      krediidipank: Krediidipank
+      lhv: LHV Pank
+      nordea: Nordea
+      paypal: PayPal
+      sampo: Danske Bank
+      seb: SEB
+      swedbank: Swedbank
+
+    currency:
+      EUR: "€"
+      USD: "$"
+
+    payment:
+      message: "%{shop_name} e-poe tellimus nr %{order_id} (%{payment_id})"
+      status:
+        cancelled: Tühistatud
+        created: Loodud
+        delivered: Makstud
+
+  layouts:
+    admin:
+      application:
+        title: E-pood
+    application:
+      title: E-pood
+      back_to_shop: Tagasi poodi
+
+  shared:
+    admin:
+      mainmenu:
+        brand_title: Pood
+        payments: Maksed
+        bank_messages: Pangateated
+        estcard_messages: Krediitkaardimaksed
+        paypal_messages: PayPal maksed
+        app_settings: Rakenduse andmed
+    callback:
+      success: "Makse on vastu võetud"
+      cancel: "Makse tühistati"
+      error: "Probleem makse töötlemisel"
+      pending: "Makse on veel töötlemisel. Makse laekumisel teavitatakse teid emaili teel."
+      return_to_store: "Tagasi poodi"
+
+  time:
+    formats:
+      default: '%d.%m.%Y %H:%M'
+
+  number:
+    currency:
+      format:
+        delimiter: ! ' '
+        format: ! '%n %u'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        
+  will_paginate:
+    next_label: Järgmine
+    previous_label: Eelmine
+    page_gap: "&hellip;"

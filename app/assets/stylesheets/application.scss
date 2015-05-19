@@ -1,0 +1,19 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.bank-redirecting {
+  display: none;
+}
+
+.auto-submit {
+  .header-title, .back-to-shop, .payment-header, .payment-items, .payment-banks {
+    display: none;
+    visibility: none;
+  }
+
+  .bank-redirecting {
+    display: block;
+  }
+}
+
+@import "custom/style";

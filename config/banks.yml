@@ -1,0 +1,206 @@
+default:
+  krediidipank: &krediidipank
+    return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/krep/return
+    cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/krep/cancel
+
+  lhv: &lhv
+    return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/lhv/return
+    cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/lhv/cancel
+
+  nordea: &nordea
+    payments_return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/return
+    payments_reject_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/reject
+    payments_cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/nordea/cancel
+    payments_language: "4"
+    auth_language: "ET"
+    confirm: "YES"
+    keyvers: "0001"
+
+  sampo: &sampo
+    return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/sampo/return
+    cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/sampo/cancel
+
+  seb: &seb
+    return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/seb/return
+    cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/seb/cancel
+
+  swedbank: &swedbank
+    return_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/swedbank/return
+    cancel_url: <%= ENV['ECWIDSHOP_PROVIDER_RETURN_HOST'] %>/ipizza/callback/swedbank/cancel
+
+development:
+  krediidipank:
+    <<: *krediidipank
+    service_url: https://pangalink.net/banklink/krediidipank-common
+    file_cert: pangalink_krediidipank_bank_cert.pem
+    file_key: pangalink_krediidipank_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520137
+
+  lhv:
+    <<: *lhv
+    service_url: https://pangalink.net/banklink/lhv-common
+    file_cert: pangalink_lhv_bank_cert.pem
+    file_key: pangalink_lhv_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520140
+
+  nordea:
+    <<: *nordea
+    payments_service_url: https://netbank.nordea.com/pnbepay/epayn.jsp
+    payments_rcv_id: "10520153"
+    file_key: nordea_test_priv
+
+  sampo:
+    <<: *sampo
+    service_url: https://pangalink.net/banklink/sampo-common
+    file_cert: pangalink_danske_bank_cert.pem
+    file_key: pangalink_danske_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520124
+
+  seb:
+    <<: *seb
+    service_url: https://pangalink.net/banklink/seb-common
+    file_cert: pangalink_seb_bank_cert.pem
+    file_key: pangalink_seb_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520108
+
+  swedbank:
+    <<: *swedbank
+    service_url: https://pangalink.net/banklink/swedbank-common
+    file_cert: pangalink_swedbank_bank_cert.pem
+    file_key: pangalink_swedbank_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520111
+
+  estcard:
+    service_url: https://pangalink.net/banklink/ec
+    merchant_id: uid520289
+    file_cert: pangalink_estcard_bank_cert.pem
+    file_key: pangalink_estcard_user_key.pem
+
+  paypal:
+    service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
+    login: info@myshop.com
+
+production:
+  krediidipank:
+    <<: *krediidipank
+    service_url: https://i-pank.krediidipank.ee/teller/maksa
+    login: "<%= ENV['ECWIDSHOP_BANK_KREDIIDIPANK_LOGIN'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_BANK_KREDIIDIPANK_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_KREDIIDIPANK_KEY_PATH'] %>"
+    encoding: "<%= ENV['ECWIDSHOP_BANK_KREDIIDIPANK_ENCODING'] %>"
+    snd_id: "<%= ENV['ECWIDSHOP_BANK_KREDIIDIPANK_SND_ID'] %>"
+
+  lhv:
+    <<: *lhv
+    service_url: https://www.lhv.ee/banklink
+    login: "<%= ENV['ECWIDSHOP_BANK_LHV_LOGIN'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_BANK_LHV_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_LHV_KEY_PATH'] %>"
+    encoding: "<%= ENV['ECWIDSHOP_BANK_LHV_ENCODING'] %>"
+    snd_id: "<%= ENV['ECWIDSHOP_BANK_LHV_SND_ID'] %>"
+
+  nordea:
+    <<: *nordea
+    payments_service_url: https://netbank.nordea.com/pnbepay/epayn.jsp
+    payments_rcv_id: "<%= ENV['ECWIDSHOP_BANK_NORDEA_RCV_ID'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_NORDEA_KEY_PATH'] %>"
+
+  sampo:
+    <<: *sampo
+    service_url: https://www2.danskebank.ee/ibank/pizza/pizza
+    login: "<%= ENV['ECWIDSHOP_BANK_SAMPO_LOGIN'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_BANK_SAMPO_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_SAMPO_KEY_PATH'] %>"
+    encoding: "<%= ENV['ECWIDSHOP_BANK_SAMPO_ENCODING'] %>"
+    snd_id: "<%= ENV['ECWIDSHOP_BANK_SAMPO_SND_ID'] %>"
+
+  seb:
+    <<: *seb
+    service_url: https://www.seb.ee/cgi-bin/unet3.sh/un3min.r
+    login: "<%= ENV['ECWIDSHOP_BANK_SEB_LOGIN'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_BANK_SEB_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_SEB_KEY_PATH'] %>"
+    encoding: "<%= ENV['ECWIDSHOP_BANK_SEB_ENCODING'] %>"
+    snd_id: "<%= ENV['ECWIDSHOP_BANK_SEB_SND_ID'] %>"
+
+  swedbank:
+    <<: *swedbank
+    service_url: https://www.swedbank.ee/banklink
+    login: "<%= ENV['ECWIDSHOP_BANK_SWEDBANK_LOGIN'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_BANK_SWEDBANK_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_BANK_SWEDBANK_KEY_PATH'] %>"
+    encoding: "<%= ENV['ECWIDSHOP_BANK_SWEDBANK_ENCODING'] %>"
+    snd_id: "<%= ENV['ECWIDSHOP_BANK_SWEDBANK_SND_ID'] %>"
+
+  estcard:
+    service_url: https://pos.estcard.ee/ecom/iPayServlet
+    merchant_id: "<%= ENV['ECWIDSHOP_ESTCARD_MERCHANT_ID'] %>"
+    file_cert: "<%= ENV['ECWIDSHOP_ESTCARD_CERT_PATH'] %>"
+    file_key: "<%= ENV['ECWIDSHOP_ESTCARD_KEY_PATH'] %>"
+
+  paypal:
+    service_url: https://www.paypal.com/cgi-bin/webscr
+    login: info@myshop.com
+
+test:
+  krediidipank:
+    <<: *krediidipank
+    service_url: https://pangalink.net/banklink/krediidipank-common
+    file_cert: pangalink_krediidipank_bank_cert.pem
+    file_key: pangalink_krediidipank_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520137
+
+  lhv:
+    <<: *lhv
+    service_url: https://pangalink.net/banklink/lhv-common
+    file_cert: pangalink_lhv_bank_cert.pem
+    file_key: pangalink_lhv_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520140
+
+  nordea:
+    <<: *nordea
+    payments_service_url: https://pangalink.net/banklink/nordea
+    payments_rcv_id: "10520153"
+    file_key: nordea_test_priv
+
+  sampo:
+    <<: *sampo
+    service_url: https://pangalink.net/banklink/sampo-common
+    service_url: https://pangalink.net/banklink/sampo-common
+    file_cert: pangalink_danske_bank_cert.pem
+    file_key: pangalink_danske_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520124
+
+  seb:
+    <<: *seb
+    service_url: https://pangalink.net/banklink/seb-common
+    file_cert: pangalink_seb_bank_cert.pem
+    file_key: pangalink_seb_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520108
+
+  swedbank:
+    <<: *swedbank
+    service_url: https://pangalink.net/banklink/swedbank-common
+    file_cert: pangalink_swedbank_bank_cert.pem
+    file_key: pangalink_swedbank_user_key.pem
+    encoding: UTF-8
+    snd_id: uid520111
+
+  estcard:
+    service_url: https://pangalink.net/banklink/ec
+    merchant_id: uid520289
+    file_cert: pangalink_estcard_bank_cert.pem
+    file_key: pangalink_estcard_user_key.pem
+
+  paypal:
+    service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
+    login: info@myshop.com

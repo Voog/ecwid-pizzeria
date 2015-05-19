@@ -1,0 +1,48 @@
+et:
+  payment_response_mailer:
+    payment_received:
+      subject: Poes võeti vastu makse
+      payment_info: Makse info
+      order_id: Tellimuse ID
+      description: Kirjeldus
+      amount: Summa
+      customer_email: Kliendi e-mail
+      status: Staatus
+      id: Makse id
+      bank_message: Panga teade
+      transaction: Panga tehingu nr
+      receipt: Kviitungi nr
+      stamp: Stamp
+      ref_no: Viitenr
+      sender_name: Maksja nimi
+      sender_account: Maksja konto
+      receiver_name: Saaja nimi
+      receiver_account: Saaja konto
+      message: Teade
+      provider: Pank
+      transaction_info: Tehingu info
+      payment_id: Makse id
+      receipt_id: Kviitungi nr
+      currency: Valuuta
+      response_code: Tehingu kood
+      time: Aeg
+      message_data: Panga teade
+      action_text: Toimingu tekst
+      payer_id: Maksja id
+      payer_email: Maksja email
+      receiver_email: Saaja email
+
+    payment_confirmation:
+      subject: "Teie %{shop_name} e-poe makse kinnitus"
+      default_message: |
+        Tere!
+
+        Täname, et sooritasite tellimuse %{shop_name} e-poest.
+
+        --- Tellimus %{shop_name} e-poest ---
+
+        Tellitud toode: %{payment_description}
+        Maksumus: %{amount}
+
+        Lugupidamisega
+        %{shop_name}
