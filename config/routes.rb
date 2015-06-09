@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get 'admin', to: redirect('/admin/payments')
 
   resources :discounts, only: [:show]
+  resources :utilities, only: [:ip] do
+    collection do
+      get :ip
+    end
+  end
 
   match '/payments(/:provider)', to: 'payments#create', via: [:post]
   match '/ipizza/callback/:provider(/:result)', to: 'ipizza#callback', via: [:get, :post]
