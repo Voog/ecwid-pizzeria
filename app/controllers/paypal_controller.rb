@@ -3,11 +3,17 @@ class PaypalController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def callback
-    response = validate_ipn_notification(request.raw_post)
+    response = if request.raw_post.blank? && params.key?(:tx) && params[:st] == 'Completed'
+      'PDT_COMPLETED'
+    else
+      validate_ipn_notification(request.raw_post)
+    end
     message = PaypalMessage.log(params.merge(validation_status: response))
-    @payment = Payment.find_by_id(message.invoice)
+    @payment = Payment.find_by_id(message.ipn_message? ? message.invoice : message.transaction_subject)
 
     case response
+    when 'PDT_COMPLETED'
+      flash.now[:notice] = @payment && @payment.delivered? ? t('shared.callback.success') : t('shared.callback.pending')
     when "VERIFIED"
       if message.success?
         if @payment && !@payment.delivered? && message.completed?
@@ -37,7 +43,7 @@ class PaypalController < ApplicationController
       Rails.logger.error "PaypalController.callback: PayPal IPN validation was failed! ID: #{message.try(:id)}; payment_id: #{@payment.try(:id)}"
     end
 
-    redirect_to @payment.store_return_url if @payment && @payment.delivered? && @payment.store_return_url.present? && !params.key?(:ipn_track_id)
+    redirect_to @payment.store_return_url if @payment && @payment.delivered? && @payment.store_return_url.present? && !params.key?(:ipn_track_id) && message.ipn_message?
   end
 
   private
