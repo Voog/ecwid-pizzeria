@@ -58,10 +58,11 @@ class Payment < ActiveRecord::Base
           new_payment_status: (delivered? ? 'ACCEPTED' : 'CANCELLED')
         }
 
-        if Rails.env.production?
-          RestClient.post(url, params, accept: :json)
-        else
-          RestClient.get(url, params: params.merge(debug: 'yes'))
+        begin
+          exec_notification_request(url, params)
+        rescue RestClient::RequestTimeout
+          Rails.logger.warn "WARNING: Payment.send_store_notification! got timeout. Tying once more. Payment id: #{id}, order_id: #{order_id}, status: #{status}"
+          exec_notification_request(url, params)
         end
       end
     else
@@ -77,6 +78,14 @@ class Payment < ActiveRecord::Base
     'id=%s&tc=%s' % opt.to_s.split(';')
   rescue
     ''
+  end
+
+  def exec_notification_request(url, params)
+    if Rails.env.production?
+      RestClient.post(url, params, accept: :json)
+    else
+      RestClient.get(url, params: params.merge(debug: 'yes'))
+    end
   end
 
   def set_status
