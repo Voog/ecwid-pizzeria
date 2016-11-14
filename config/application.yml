@@ -17,6 +17,7 @@ default: &default
   #   %{shop_name}
   # ECWIDSHOP_PAYMENT_CONFIRMATION_EMAIL_SUBJECT_ET: "Teie %{shop_name} e-poe makse kinnitus"
   # ECWIDSHOP_SHOP_NAME: myhost.com
+  ECWIDSHOP_PAYMENT_CONFIRMATION_EMAIL_ENABLED: "true"
 
 development:
   <<: *default

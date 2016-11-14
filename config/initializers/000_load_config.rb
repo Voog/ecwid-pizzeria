@@ -41,6 +41,9 @@ EcwidPizzeria::Application.configure do
     notification_email: ENV['ECWIDSHOP_MAILER_NOTIFICATION_EMAIL']
   )
 
+  # Enable customer payment confirmation email
+  config.app.payment_confirmation_email_enabled = ENV.fetch('ECWIDSHOP_PAYMENT_CONFIRMATION_EMAIL_ENABLED', 'true').to_s.downcase == 'true'
+
   # Allow to override default payment confirmation file subject and content
   config.app.payment_confirmation_email_subject = OpenStruct.new
   config.app.payment_confirmation_email_body = OpenStruct.new

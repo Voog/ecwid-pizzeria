@@ -22,7 +22,7 @@ class IpizzaController < ApplicationController
           end
 
           begin
-            PaymentResponseMailer.payment_confirmation(bank_message, @payment).deliver_now
+            PaymentResponseMailer.payment_confirmation(bank_message, @payment).deliver_now if EcwidPizzeria::Application.config.app.payment_confirmation_email_enabled
           rescue Exception => e
             Rails.logger.error "ERROR: PaymentResponseMailer.payment_confirmation was failed. Payment id: #{@payment.id}: #{e.message.inspect}: \n#{e.backtrace[0..8].join("\n  ")}"
           end
