@@ -60,8 +60,9 @@ class Payment < ActiveRecord::Base
 
         begin
           exec_notification_request(url, params)
-        rescue RestClient::RequestTimeout
+        rescue RestClient::RequestTimeout, RestClient::TooManyRequests
           Rails.logger.warn "WARNING: Payment.send_store_notification! got timeout. Tying once more. Payment id: #{id}, order_id: #{order_id}, status: #{status}"
+          sleep 2
           exec_notification_request(url, params)
         end
       end
