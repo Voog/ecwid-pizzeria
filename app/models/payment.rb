@@ -48,7 +48,9 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def send_store_notification!
+  def send_store_notification!(opt = {})
+    retry_attempt = opt.fetch(:retry_attempt, 1)
+
     if EcwidPizzeria::Application.config.app.ecwid.order_api_enabled
       if delivered? || cancelled?
         url = "https://app.ecwid.com/api/v1/#{EcwidPizzeria::Application.config.app.ecwid.shop_id}/orders"
@@ -61,9 +63,11 @@ class Payment < ActiveRecord::Base
         begin
           exec_notification_request(url, params)
         rescue RestClient::RequestTimeout, RestClient::TooManyRequests
-          Rails.logger.warn "WARNING: Payment.send_store_notification! got timeout. Tying once more. Payment id: #{id}, order_id: #{order_id}, status: #{status}"
-          sleep 2
-          exec_notification_request(url, params)
+          Rails.logger.warn "WARNING: Payment.send_store_notification! got timeout. #{'Tying once more.' if retry_attempt < 3} Retry_attempt: #{retry_attempt} Payment id: #{id}, order_id: #{order_id}, status: #{status}"
+          if retry_attempt < 3
+            sleep 10 * retry_attempt
+            send_store_notification!(retry_attempt: retry_attempt + 1)
+          end
         end
       end
     else
