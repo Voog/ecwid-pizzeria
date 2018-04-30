@@ -11,7 +11,7 @@ en:
   labels:
     banks:
       estcard: "Master, VISA"
-      krediidipank: Krediidipank
+      krediidipank: Coop Pank
       lhv: LHV Pank
       nordea: Nordea
       paypal: PayPal
