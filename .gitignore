@@ -17,3 +17,4 @@
 /config/deploy/*
 !/config/deploy/example_app*
 /custom*
+.vscode

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511192642) do
+ActiveRecord::Schema.define(version: 20180502111854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,41 @@ ActiveRecord::Schema.define(version: 20150511192642) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "make_commerce_messages", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.string   "app_status"
+    t.string   "status"
+    t.string   "message_type"
+    t.decimal  "amount",          precision: 12, scale: 2
+    t.string   "currency"
+    t.string   "customer_name"
+    t.string   "merchant_data"
+    t.datetime "message_time"
+    t.string   "shop"
+    t.string   "reference"
+    t.string   "transaction_key"
+    t.string   "signature"
+    t.string   "mac"
+    t.text     "raw_post"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "make_commerce_messages", ["payment_id"], name: "index_make_commerce_messages_on_payment_id", using: :btree
+  add_index "make_commerce_messages", ["reference"], name: "index_make_commerce_messages_on_reference", using: :btree
+  add_index "make_commerce_messages", ["transaction_key"], name: "index_make_commerce_messages_on_transaction_key", using: :btree
+
+  create_table "make_commerce_requests", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.string   "external_transaction_key"
+    t.string   "payment_method"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "make_commerce_requests", ["external_transaction_key"], name: "index_make_commerce_requests_on_external_transaction_key", using: :btree
+  add_index "make_commerce_requests", ["payment_id"], name: "index_make_commerce_requests_on_payment_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id",                                            null: false

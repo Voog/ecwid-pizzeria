@@ -55,3 +55,13 @@
 <%= t('.message') %>: <%= @bank_message.item_name %>
 <%= t('.status') %>: <%= @bank_message.payment_status %>
 <% end %>
+
+<% if @bank_message.is_a?(MakeCommerceMessage) %>
+<%= t('.transaction_info') %>
+----------------
+
+<%= t('.transaction') %>: <%= @bank_message.transaction_key %>
+<%= t('.sender_name') %>: <%= @bank_message.customer_name %>
+<%= t('.time') %>: <%= @bank_message.message_time %>
+<%= t('.status') %>: <%= @bank_message.status %>
+<% end %>

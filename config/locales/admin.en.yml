@@ -9,6 +9,7 @@ en:
         enabled: Enabled
         estcard: EstCard
         mailer: Mail server
+        make_commerce: MakeCommerce
         not_configured: Not configured
         paypal: PayPal
         title: Application settings
@@ -43,6 +44,20 @@ en:
         receipt_no: "Receipt no"
         respcode: Response code
         title: Credit card payments
+
+    make_commerce_messages:
+      index:
+        amount: Amount
+        app_status: Status
+        customer_name: Customer name
+        id: ID
+        merchant_data: Merchant data
+        message_time: Message time
+        message_type: Message type
+        reference: Order ID
+        status: Gateway status
+        title: MakeCommerce payments
+        transaction_key: Transaction ID
 
     payments:
       index:

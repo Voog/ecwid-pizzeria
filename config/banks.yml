@@ -85,6 +85,14 @@ development:
     service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
     login: info@myshop.com
 
+  make_commerce:
+    api_url: https://api-test.maksekeskus.ee/v1
+    service_url: https://payment-test.maksekeskus.ee/pay/1/link.html
+    service_signed_url: https://payment-test.maksekeskus.ee/pay/1/signed.html
+    shop_id: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_SHOP_ID'].presence || '63121088-b09d-4dab-95b5-a6b91069746b' %>"
+    api_secret: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_API_SECRET'].presence || 'vmbyNuJvkEoyU47H98YcYXlDL8b8wKcnfN07X9crb47QVPPImRDP0Wad9m1sQweA' %>"
+    enabled_methods: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_ENABLED_METHODS'].presence || 'swedbank,seb,lhv,nordea,danske,krediidipank,pocopay,liisi_ee,citadele,pohjola,alandsbanken,handelsbanken,saastopankki,spankki,tapiola,visa,mastercard,maestro' %>"
+
 production:
   krediidipank:
     <<: *krediidipank
@@ -147,6 +155,14 @@ production:
     service_url: https://www.paypal.com/cgi-bin/webscr
     login: info@myshop.com
 
+  make_commerce:
+    api_url: https://api.maksekeskus.ee/v1
+    service_url: https://payment.maksekeskus.ee/pay/1/link.html
+    service_signed_url: https://payment.maksekeskus.ee/pay/1/signed.html
+    shop_id: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_SHOP_ID'] %>"
+    api_secret: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_API_SECRET'] %>"
+    enabled_methods: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_ENABLED_METHODS'] %>"
+
 test:
   krediidipank:
     <<: *krediidipank
@@ -204,3 +220,11 @@ test:
   paypal:
     service_url: https://www.sandbox.paypal.com/cgi-bin/webscr
     login: info@myshop.com
+
+  make_commerce:
+    api_url: https://api-test.maksekeskus.ee/v1
+    service_url: https://payment-test.maksekeskus.ee/pay/1/link.html
+    service_signed_url: https://payment-test.maksekeskus.ee/pay/1/signed.html
+    shop_id: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_SHOP_ID'].presence || '63121088-b09d-4dab-95b5-a6b91069746b' %>"
+    api_secret: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_API_SECRET'].presence || 'vmbyNuJvkEoyU47H98YcYXlDL8b8wKcnfN07X9crb47QVPPImRDP0Wad9m1sQweA' %>"
+    enabled_methods: "<%= ENV['ECWIDSHOP_MAKE_COMMERCE_ENABLED_METHODS'].presence || 'swedbank,seb,lhv,nordea,danske,krediidipank,pocopay,liisi_ee,citadele,pohjola,alandsbanken,handelsbanken,saastopankki,spankki,tapiola,visa,mastercard,maestro' %>"

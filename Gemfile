@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.10'
 gem 'ipizza-rails', '~> 2.0.1'
 gem 'will_paginate', '~> 3.0.7'
 
@@ -8,11 +8,14 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.3'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0.5', '>= 4.0.5'
 gem 'therubyracer', '~> 0.12.1'
 gem 'rest-client', '~> 1.7.3'
 # Ecwid API v3
 gem 'ecwid_api', git: 'https://github.com/davidbiehl/ecwid_api.git', ref: '5a5d4e8241168f484fe2690d96e42138675bf4ee', require: false
+
+gem 'faraday', require: false
+gem 'faraday_middleware', require: false
 
 gem 'figaro', '~> 1.1.0'
 gem 'rack-cors', '~> 0.4.0'

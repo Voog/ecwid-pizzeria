@@ -95,6 +95,21 @@ EcwidPizzeria::Application.configure do
     notify_url: "#{config.app.return_host}/paypal/callback"
   )
 
+  # Load MakeCommerce related configuration
+  make_commerce_conf = ipizza_conf.fetch('make_commerce', {})
+  config.make_commerce = OpenStruct.new(
+    enabled: ENV['ECWIDSHOP_MAKE_COMMERCE_ENABLED'].to_s.downcase == 'true',
+    shop_id: make_commerce_conf.fetch('shop_id', ''),
+    api_secret: make_commerce_conf.fetch('api_secret', ''),
+    enabled_methods: make_commerce_conf.fetch('enabled_methods', '').split(','),
+    api_url: make_commerce_conf.fetch('api_url', 'https://api.maksekeskus.ee/v1'),
+    service_url: make_commerce_conf.fetch('service_url', 'https://payment.maksekeskus.ee/pay/1/link.html'),
+    service_signed_url: make_commerce_conf.fetch('service_signed_url', 'https://payment.maksekeskus.ee/pay/1/signed.html'),
+    return_url: "#{config.app.return_host}/make_commerce/return",
+    cancel_url: "#{config.app.return_host}/make_commerce/cancel",
+    notification_url: "#{config.app.return_host}/make_commerce/notification"
+  )
+
   # Setup email delivering
   config.action_mailer.delivery_method = ENV['ECWIDSHOP_MAILER_DELIVERY_METHOD'].downcase.to_sym if ENV['ECWIDSHOP_MAILER_DELIVERY_METHOD'].present?
   # Setup SMTP settings
