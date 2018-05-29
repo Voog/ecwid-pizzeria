@@ -43,13 +43,35 @@
   <div class="col-md-6 col-md-offset-3">
     <ul class="list-inline">
       <% EcwidPizzeria::Application.config.banks.enabled.each do |code| %>
+        <% if @ipizza_payment.present? %>
         <li>
           <%= ipizza_payment_form_tag @ipizza_payment, service: code, id: "payment-provider-#{code}" do %>
-            <%= image_submit_tag "#{code}.gif", alt: t(code, scope: 'labels.banks'), title: t(code, scope: 'labels.banks') %>
+            <%= image_submit_tag "#{code}.gif", alt: t(code, scope: 'labels.banks'), title: t(code, scope: 'labels.banks'), class: 'bank-logo' %>
           <% end %>
         </li>
+        <% end %>
       <% end %>
-      <% if EcwidPizzeria::Application.config.estcard.enabled %>
+      <% if EcwidPizzeria::Application.config.make_commerce.enabled && @makecommerce.present? %>
+        <% @makecommerce[:enabled_methods].each do |code| %>
+          <% next if @payment_method.present? && @payment_method != code %>
+          <li>
+            <% if @payment_request_settings.present? %>
+              <%= form_tag @payment_request_settings[:url], id: "payment-provider-makecommerce-#{code}" do %>
+                <% @payment_request_settings[:attributes].each do |k, v| %>
+                  <%= hidden_field_tag k, v %>
+                <% end %>
+                <%= image_submit_tag "https://static.maksekeskus.ee/img/channel/lnd/#{code}.png", alt: t(code, scope: 'labels.makecommerce'), title: t(code, scope: 'labels.makecommerce'), class: 'bank-logo' %>
+              <% end %>
+            <% else %>
+              <%= form_tag payments_path("makecommerce_#{code}"), id: "payment-provider-makecommerce-#{code}" do %>
+                <%= hidden_field_tag :payment_id, @payment.id %>
+                <%= image_submit_tag "https://static.maksekeskus.ee/img/channel/lnd/#{code}.png", alt: t(code, scope: 'labels.makecommerce'), title: t(code, scope: 'labels.makecommerce'), class: 'bank-logo' %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if EcwidPizzeria::Application.config.estcard.enabled && @estcard_request.present? %>
         <li>
           <%= form_tag EcwidPizzeria::Application.config.estcard.service_url, id: 'payment-provider-estcard' do %>
             <%= hidden_field_tag :action, @estcard_request.action %>
@@ -61,11 +83,11 @@
             <%= hidden_field_tag :datetime, @estcard_request.datetime %>
             <%= hidden_field_tag :mac, @estcard_request.mac %>
             <%= hidden_field_tag :lang, @estcard_request.lang %>
-            <%= image_submit_tag 'estcard.png', alt: t('labels.banks.estcard'), alt: t('labels.banks.estcard') %>
+            <%= image_submit_tag 'estcard.png', alt: t('labels.banks.estcard'), class: 'bank-logo' %>
           <% end %>
         </li>
       <% end %>
-      <% if EcwidPizzeria::Application.config.paypal.enabled %>
+      <% if EcwidPizzeria::Application.config.paypal.enabled && @paypal_payment.present? %>
         <li>
           <%= form_tag EcwidPizzeria::Application.config.paypal.service_url, id: 'payment-provider-paypal' do %>
             <%= hidden_field_tag :business, @paypal_payment.business %>
@@ -81,7 +103,7 @@
             <%= hidden_field_tag :notify_url, @paypal_payment.notify_url %>
             <%= hidden_field_tag :return, @paypal_payment.return %>
             <%= hidden_field_tag :cancel_return, @paypal_payment.cancel_return %>
-            <%= image_submit_tag 'paypal.png', alt: t('labels.banks.paypal'), alt: t('labels.banks.paypal') %>
+            <%= image_submit_tag 'paypal.png', alt: t('labels.banks.paypal'), class: 'bank-logo' %>
           <% end %>
         </li>
       <% end %>
@@ -93,6 +115,6 @@
 <% content_for :body_class, 'auto-submit' %>
 <% content_for :disable_js, true %>
 <script type="text/javascript" charset="utf-8">
-  document.getElementById('payment-provider-<%= @selected_provider %>').submit();
+  document.getElementById('payment-provider-<%= [@selected_provider, @payment_method].compact.join('-') %>').submit();
 </script>
 <%- end -%>

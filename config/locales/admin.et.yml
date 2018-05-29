@@ -9,6 +9,7 @@ et:
         enabled: Aktiivne
         estcard: EstCard
         mailer: Mailiserver
+        make_commerce: Maksekeskus
         not_configured: Seadistamata
         paypal: PayPal
         title: Rakenduse seaded
@@ -33,6 +34,20 @@ et:
         sender_account: Konto
         sender_name: Nimi
         title: Panga sõnum
+
+    make_commerce_messages:
+      index:
+        amount: Summa
+        app_status: Staatus
+        customer_name: Kliendi nimi
+        id: ID
+        merchant_data: Kaupmehe andmed
+        message_time: Aeg
+        message_type: Makseteate tüüp
+        reference: Tellimus
+        status: Maksvärava staatus
+        title: Maksekeskuse maksed
+        transaction_key: Tehingu ID
 
     estcard_messages:
       index:

@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1><%= t('.title') %></h1>
+</div>
+
+<table class="table table-striped table-condensed">
+<thead>
+<tr>
+  <th><%= t('.id') %></th>
+  <th><%= t('.reference') %></th>
+  <th><%= t('.app_status') %></th>
+  <th><%= t('.status') %></th>
+  <th><%= t('.message_type') %></th>
+  <th><%= t('.amount') %></th>
+  <th><%= t('.customer_name') %></th>
+  <th><%= t('.merchant_data') %></th>
+  <th><%= t('.transaction_key') %></th>
+  <th><%= t('.message_time') %></th>
+</tr>
+</thead>
+<tbody>
+<% @messages.each do |message| %>
+<tr>
+  <td><%= message.id %></td>
+  <td><%= message.reference %></td>
+  <td><span class="label label-<%= message.success? ? 'success' : 'default' %>"><%= message.app_status.try(:humanize) %></span></td>
+  <td><%= message.status %></td>
+  <td><%= message.message_type.try(:humanize) %></td>
+  <td><%= number_to_currency(message.amount, unit: message.currency.to_s) %></td>
+  <td><%= message.customer_name %></td>
+  <td><%= message.merchant_data %></td>
+  <td><%= message.transaction_key %></td>
+  <td><%= l(message.message_time.present? ? message.message_time : message.message_time.created_at) rescue '' %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+<div class="text-center"><%= will_paginate @messages %></div>

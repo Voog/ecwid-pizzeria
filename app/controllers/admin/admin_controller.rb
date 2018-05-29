@@ -9,6 +9,7 @@ class Admin::AdminController < ApplicationController
     @banks_conf = EcwidPizzeria::Application.config.banks
     @estcard_conf = EcwidPizzeria::Application.config.estcard
     @paypal_conf = EcwidPizzeria::Application.config.paypal
+    @make_commerce = EcwidPizzeria::Application.config.make_commerce
     @mailer_conf = EcwidPizzeria::Application.config.action_mailer
   end
 

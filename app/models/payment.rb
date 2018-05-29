@@ -10,6 +10,8 @@ class Payment < ActiveRecord::Base
 
   before_validation :set_status, on: :create
 
+  scope :created, -> { where(status: Status::Created)}
+
   def delivered?
     Status::Delivered == status
   end

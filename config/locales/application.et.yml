@@ -11,13 +11,36 @@ et:
   labels:
     banks:
       estcard: "Master, VISA"
-      krediidipank: Krediidipank
+      krediidipank: Coop Pank
       lhv: LHV Pank
-      nordea: Nordea
+      nordea: Luminor
       paypal: PayPal
       sampo: Danske Bank
       seb: SEB
       swedbank: Swedbank
+
+    makecommerce:
+      aktia: Aktia bank
+      alandsbanken: Alandsbanken
+      citadele: Citadele
+      danske: Danske
+      handelsbanken: Handelsbanken
+      krediidipank: Coop Pank
+      lhv: LHV
+      liisi_ee: Liisi
+      maestro: Maestro
+      mastercard: Mastercard
+      nordea: Luminor
+      omasaastopankki: Oma Säästöpankki
+      pocopay: Pocopay
+      pohjola: Pohjola
+      poppankki: POP Pankki
+      saastopankki: Säästöpankki
+      seb: SEB
+      spankki: "S-Pankki"
+      swedbank: Swedbank
+      tapiola: Tapiola
+      visa: Visa
 
     currency:
       EUR: "€"
@@ -46,6 +69,7 @@ et:
         bank_messages: Pangateated
         estcard_messages: Krediitkaardimaksed
         paypal_messages: PayPal maksed
+        make_commerce_messages: Maksekeskuse maksed
         app_settings: Rakenduse andmed
     callback:
       success: "Makse on vastu võetud"
@@ -67,7 +91,7 @@ et:
         separator: ! ','
         significant: false
         strip_insignificant_zeros: false
-        
+
   will_paginate:
     next_label: Järgmine
     previous_label: Eelmine

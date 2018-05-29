@@ -60,6 +60,10 @@
     <% %w(enabled login service_url).each do |key| %>
       <b><%= key.humanize %>:</b> <%= @paypal_conf.send(key) %><br/>
     <% end %>
+    <h3><%= t('.make_commerce') %></h3>
+    <% @make_commerce.marshal_dump.each do |key, value| %>
+      <b><%= key.to_s.humanize %>:</b> <%= value.is_a?(Array) ? value.join(', ') : value %><br/>
+    <% end %>
   </div>
 </div>
 <br>
